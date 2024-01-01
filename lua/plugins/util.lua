@@ -11,6 +11,15 @@ return {
     },
     opts = function()
       require("telescope").load_extension("zoxide")
+      return {
+        defaults = {
+          mappings = {
+            n = {
+              ["jk"] = require("telescope.actions").close,
+            },
+          },
+        },
+      }
     end,
   },
 }
