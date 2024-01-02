@@ -23,6 +23,8 @@ return {
   -- git diff view
   {
     "sindrets/diffview.nvim",
+    lazy = true,
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
     opts = function()
       local actions = require("diffview.actions")
       local toggle_files = {
