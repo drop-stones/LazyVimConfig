@@ -11,6 +11,9 @@ return {
   -- DAP
   { import = "lazyvim.plugins.extras.dap.core" },
 
+  -- rust
+  { import = "lazyvim.plugins.extras.lang.rust" },
+
   -- clangd
   { import = "lazyvim.plugins.extras.lang.clangd" },
 
