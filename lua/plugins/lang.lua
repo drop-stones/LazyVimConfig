@@ -28,4 +28,7 @@ return {
 
   -- JSON
   { import = "lazyvim.plugins.extras.lang.json" },
+
+  -- YAML
+  { import = "lazyvim.plugins.extras.lang.yaml" },
 }
