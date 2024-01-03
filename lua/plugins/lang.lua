@@ -8,6 +8,9 @@ return {
     },
   },
 
+  -- DAP
+  { import = "lazyvim.plugins.extras.dap.core" },
+
   -- clangd
   { import = "lazyvim.plugins.extras.lang.clangd" },
 }
