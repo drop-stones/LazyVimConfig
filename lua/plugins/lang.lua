@@ -22,4 +22,7 @@ return {
 
   -- markdown
   { import = "lazyvim.plugins.extras.lang.markdown" },
+
+  -- JSON
+  { import = "lazyvim.plugins.extras.lang.json" },
 }
