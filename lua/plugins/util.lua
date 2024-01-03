@@ -6,7 +6,7 @@ return {
     opts = {
       defaults = {
         mode = { "n", "v" },
-        ["<leader>t"] = { name = "+terminal" },
+        ["<leader>T"] = { name = "+terminal" },
       },
     },
   },
@@ -58,7 +58,7 @@ return {
     },
     keys = {
       {
-        "<leader>tt",
+        "<leader>Tt",
         function()
           local count = vim.v.count1
           require("toggleterm").toggle(count, 100, require("lazyvim.util").root.get(), "tab")
@@ -66,7 +66,7 @@ return {
         desc = "ToggleTerm (tab root_dir)",
       },
       {
-        "<leader>tf",
+        "<leader>Tf",
         function()
           local count = vim.v.count1
           require("toggleterm").toggle(count, 0, require("lazyvim.util").root.get(), "float")
@@ -74,7 +74,7 @@ return {
         desc = "ToggleTerm (float root_dir)",
       },
       {
-        "<leader>th",
+        "<leader>Th",
         function()
           local count = vim.v.count1
           require("toggleterm").toggle(count, 15, require("lazyvim.util").root.get(), "horizontal")
@@ -82,7 +82,7 @@ return {
         desc = "ToggleTerm (horizontal root_dir)",
       },
       {
-        "<leader>tv",
+        "<leader>Tv",
         function()
           local count = vim.v.count1
           require("toggleterm").toggle(count, vim.o.columns * 0.4, require("lazyvim.util").root.get(), "vertical")
@@ -90,40 +90,40 @@ return {
         desc = "ToggleTerm (vertical root_dir)",
       },
       {
-        "<leader>tT",
+        "<leader>TT",
         function()
           require("toggleterm").toggle(1, 100, vim.loop.cwd(), "tab")
         end,
         desc = "ToggleTerm (tab cwd_dir)",
       },
       {
-        "<leader>tF",
+        "<leader>TF",
         function()
           require("toggleterm").toggle(1, 0, require("lazyvim.util").root.get(), "float")
         end,
         desc = "ToggleTerm (float cwd_dir)",
       },
       {
-        "<leader>tH",
+        "<leader>TH",
         function()
           require("toggleterm").toggle(1, 15, require("lazyvim.util").root.get(), "horizontal")
         end,
         desc = "ToggleTerm (horizontal cwd_dir)",
       },
       {
-        "<leader>tV",
+        "<leader>TV",
         function()
           require("toggleterm").toggle(1, vim.o.columns * 0.4, require("lazyvim.util").root.get(), "vertical")
         end,
         desc = "ToggleTerm (vertical cwd_dir)",
       },
       {
-        "<leader>tn",
+        "<leader>Tn",
         "<cmd>ToggleTermSetName<cr>",
         desc = "Set term name",
       },
       {
-        "<leader>ts",
+        "<leader>Ts",
         "<cmd>TermSelect<cr>",
         desc = "Select term",
       },
