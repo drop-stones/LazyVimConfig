@@ -17,6 +17,9 @@ return {
   -- clangd
   { import = "lazyvim.plugins.extras.lang.clangd" },
 
+  -- python
+  { import = "lazyvim.plugins.extras.lang.python" },
+
   -- omnisharp
   { import = "lazyvim.plugins.extras.lang.omnisharp" },
 
