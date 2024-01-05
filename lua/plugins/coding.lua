@@ -11,6 +11,7 @@ return {
       return false
     end,
   },
+
   -- Escape by "jk"
   {
     "TheBlob42/houdini.nvim",
@@ -29,4 +30,7 @@ return {
       },
     },
   },
+
+  -- Improved Yank and Put
+  { import = "lazyvim.plugins.extras.coding.yanky" },
 }
