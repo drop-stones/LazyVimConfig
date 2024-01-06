@@ -90,4 +90,11 @@ return {
       },
     },
   },
+
+  -- just
+  {
+    "IndianBoy42/tree-sitter-just",
+    ft = { "just" },
+    opts = {},
+  },
 }
