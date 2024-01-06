@@ -31,6 +31,16 @@ return {
     },
   },
 
+  -- Escape by "ｊｋ" (in double-byte character)
+  {
+    "max397574/better-escape.nvim",
+    event = "VeryLazy",
+    opts = {
+      mapping = { "ｊｋ" },
+      timeout = 150,
+    },
+  },
+
   -- Improved Yank and Put
   { import = "lazyvim.plugins.extras.coding.yanky" },
 }
