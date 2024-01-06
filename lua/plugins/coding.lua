@@ -3,7 +3,7 @@ return {
   {
     "drop-stones/ime-switch-win.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    event = "LazyFile",
+    event = "VeryLazy",
     enabled = function()
       if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 or vim.fn.has("wsl") == 1 then
         return true
