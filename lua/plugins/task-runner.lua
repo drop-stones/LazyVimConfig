@@ -10,8 +10,18 @@ return {
   },
   {
     "stevearc/overseer.nvim",
+    dependencies = { "akinsho/toggleterm.nvim" },
     cmd = { "OverseerOpen", "OverseerRunCmd", "OverseerRun" },
-    opts = {},
+    opts = {
+      strategy = {
+        "toggleterm",
+        -- Work around to see a task log.
+        -- https://github.com/stevearc/overseer.nvim/issues/186
+        on_create = function()
+          vim.cmd("stopinsert")
+        end,
+      },
+    },
     keys = {
       { "<leader>:o", "<Cmd>OverseerOpen<CR>", desc = "Open the overseer window" },
       { "<leader>:x", "<Cmd>OverseerClose<CR>", desc = "Close the overseer window" },
