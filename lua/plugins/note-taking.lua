@@ -4,34 +4,58 @@ return {
     optional = true,
     opts = {
       defaults = {
-        ["<leader>z"] = { name = "+zettelkasten" },
+        ["<leader>o"] = { name = "+obsidian" },
       },
     },
   },
-  -- markdown zettelkasten
+
+  -- obsidian
   {
-    "renerocksai/telekasten.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "renerocksai/calendar-vim" },
-    cmd = { "Telekasten" },
-    opts = {
-      home = vim.fn.expand("~/zettelkasten"),
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommend, use latest release instead of latest commit
+    ft = "markdown",
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- Optional
+      "hrsh7th/nvim-cmp",
+      "nvim-telescope/telescope.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    cmd = {
+      "ObsidianNew",
+      "ObsidianOpen",
+      "ObsidianQuickSwitch",
+      "ObsidianToday",
+      "ObsidianYesterday",
+      "ObsidianTomorrow",
+      "ObsidianSearch",
+      "ObsidianWorkspace",
     },
     keys = {
-      { "<leader>zz", "<Cmd>Telekasten panel<CR>", desc = "Open the command palette" },
-      { "<leader>zf", "<Cmd>Telekasten find_notes<CR>", desc = "Find notes by title" },
-      { "<leader>zg", "<Cmd>Telekasten search_notes<CR>", desc = "Search (grep) in all notes" },
-      { "<leader>zd", "<Cmd>Telekasten goto_today<CR>", desc = "Open today's daily note" },
-      { "<leader>zl", "<Cmd>Telekasten follow_link<CR>", desc = "Follow the link under the cursor" },
-      { "<leader>zn", "<Cmd>Telekasten new_note<CR>", desc = "Create a new note" },
-      { "<leader>zc", "<Cmd>Telekasten show_calendar<CR>", desc = "Show the calendar" },
-      { "<leader>zb", "<Cmd>Telekasten show_backlinks<CR>", desc = "Show all notes linking to the current one" },
-      { "<leader>zI", "<Cmd>Telekasten insert_img_link<CR>", desc = "Insert a link to the image" },
-      { "<leader>zt", "<Cmd>Telekasten show_tags<CR>", desc = "Show the tag list" },
+      { "<leader>on", "<Cmd>ObsidianNew<Cr>", desc = "Create a new note" },
+      { "<leader>oo", "<Cmd>ObsidianOpen<Cr>", desc = "Open a note in the Obsidian app" },
+      { "<leader>or", "<Cmd>ObsidianRename<Cr>", desc = "Rename the note of the current buffer" },
+      { "<leader>oq", "<Cmd>ObsidianQuickSwitch<Cr>", desc = "Quickly switch to anther note" },
+      { "<leader>of", "<Cmd>ObsidianFollowLink<Cr>", desc = "Follow a note reference" },
+      { "<leader>ob", "<Cmd>ObsidianBacklinks<Cr>", desc = "Get a location list of references to the current buffer" },
+      { "<leader>ot", "<Cmd>ObsidianToday<Cr>", desc = "Open a new daily note" },
+      { "<leader>oy", "<Cmd>ObsidianYesterday<Cr>", desc = "Open the daily note for yesterday" },
+      { "<leader>oT", "<Cmd>ObsidianTomorrow<Cr>", desc = "Open the daily note for tomorrow" },
+      { "<leader>os", "<Cmd>ObsidianSearch<Cr>", desc = "Search for notes" },
+      { "<leader>ol", "<Cmd>ObsidianLink<Cr>", desc = "Link an inline visual selection of text to note" },
+      { "<leader>oL", "<Cmd>ObsidianLinkNew<Cr>", desc = "Create a new note and link it" },
+      { "<leader>ow", "<Cmd>ObsidianWorkspace<Cr>", desc = "Switch to another workspace" },
+      { "<leader>op", "<Cmd>ObsidianPasteImg<Cr>", desc = "Paste an image from clipboard" },
     },
-  },
-  -- calendar for journal in zettelkasten
-  {
-    "renerocksai/calendar-vim",
-    cmd = { "Calendar", "CalendarH", "CalendarT", "CalendarVR", "CalendarSearch" },
+    opts = {
+      workspaces = {
+        {
+          name = "notes",
+          path = "~/vaults/notes",
+        },
+      },
+    },
   },
 }
