@@ -42,9 +42,9 @@ return {
       { "<leader>oq", "<Cmd>ObsidianQuickSwitch<Cr>", desc = "Quickly switch to anther note" },
       { "<leader>of", "<Cmd>ObsidianFollowLink<Cr>", desc = "Follow a note reference" },
       { "<leader>ob", "<Cmd>ObsidianBacklinks<Cr>", desc = "Get a location list of references to the current buffer" },
-      { "<leader>ot", "<Cmd>ObsidianToday<Cr>", desc = "Open a new daily note" },
+      { "<leader>od", "<Cmd>ObsidianToday<Cr>", desc = "Open a new daily note" },
       { "<leader>oy", "<Cmd>ObsidianYesterday<Cr>", desc = "Open the daily note for yesterday" },
-      { "<leader>oT", "<Cmd>ObsidianTomorrow<Cr>", desc = "Open the daily note for tomorrow" },
+      { "<leader>ot", "<Cmd>ObsidianTomorrow<Cr>", desc = "Open the daily note for tomorrow" },
       { "<leader>os", "<Cmd>ObsidianSearch<Cr>", desc = "Search for notes" },
       { "<leader>ol", "<Cmd>ObsidianLink<Cr>", desc = "Link an inline visual selection of text to note" },
       { "<leader>oL", "<Cmd>ObsidianLinkNew<Cr>", desc = "Create a new note and link it" },
@@ -57,6 +57,23 @@ return {
           name = "notes",
           path = "~/vaults/notes",
         },
+        {
+          name = "books",
+          path = "~/vaults/books",
+        },
+      },
+
+      notes_subdir = "ideas",
+
+      daily_notes = {
+        -- Optional, if you keep daily notes in a separate directory.
+        folder = "dailies",
+        -- Optional, if you want to change the date format for the ID of daily notes.
+        date_format = "%Y-%m-%d",
+        -- Optional, if you want to change the date format of the default alias of daily notes.
+        alias_format = "%Y-%m-%d",
+        -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
+        template = nil,
       },
     },
   },
