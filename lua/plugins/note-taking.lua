@@ -75,6 +75,12 @@ return {
         -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
         template = nil,
       },
+
+      templates = {
+        subdir = "templates",
+        date_format = "%Y-%m-%d",
+        time_format = "%H:%M",
+      },
     },
   },
 
