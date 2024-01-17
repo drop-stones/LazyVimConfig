@@ -10,6 +10,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+-- commentstring
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "cpp" },
+  callback = function()
+    vim.bo.commentstring = "// %s"
+  end,
+})
+
 -- obsidian.nvim requires conceallevel to be set 1 or 2
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "markdown" },
