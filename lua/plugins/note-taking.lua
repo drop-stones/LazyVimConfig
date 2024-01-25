@@ -36,20 +36,37 @@ return {
       "ObsidianWorkspace",
     },
     keys = {
+      -- normal mode
       { "<leader>on", "<Cmd>ObsidianNew<Cr>", desc = "Create a new note" },
       { "<leader>oo", "<Cmd>ObsidianOpen<Cr>", desc = "Open a note in the Obsidian app" },
       { "<leader>or", "<Cmd>ObsidianRename<Cr>", desc = "Rename the note of the current buffer" },
       { "<leader>oq", "<Cmd>ObsidianQuickSwitch<Cr>", desc = "Quickly switch to anther note" },
       { "<leader>of", "<Cmd>ObsidianFollowLink<Cr>", desc = "Follow a note reference" },
+      {
+        "<leader>ov",
+        "<Cmd>ObsidianFollowLink vsplit<Cr>",
+        desc = "Follow a note reference and open in vertical split",
+      },
+      {
+        "<leader>oh",
+        "<Cmd>ObsidianFollowLink hsplit<Cr>",
+        desc = "Follow a note reference and open in horizontal split",
+      },
       { "<leader>ob", "<Cmd>ObsidianBacklinks<Cr>", desc = "Get a location list of references to the current buffer" },
       { "<leader>od", "<Cmd>ObsidianToday<Cr>", desc = "Open a new daily note" },
       { "<leader>oy", "<Cmd>ObsidianYesterday<Cr>", desc = "Open the daily note for yesterday" },
       { "<leader>ot", "<Cmd>ObsidianTomorrow<Cr>", desc = "Open the daily note for tomorrow" },
       { "<leader>os", "<Cmd>ObsidianSearch<Cr>", desc = "Search for notes" },
-      { "<leader>ol", "<Cmd>ObsidianLink<Cr>", desc = "Link an inline visual selection of text to note" },
-      { "<leader>oL", "<Cmd>ObsidianLinkNew<Cr>", desc = "Create a new note and link it" },
       { "<leader>ow", "<Cmd>ObsidianWorkspace<Cr>", desc = "Switch to another workspace" },
       { "<leader>op", "<Cmd>ObsidianPasteImg<Cr>", desc = "Paste an image from clipboard" },
+      -- visual mode
+      {
+        "<leader>ol",
+        "<Cmd>ObsidianLink<Cr>",
+        mode = { "n", "v" },
+        desc = "Link an inline visual selection of text to note",
+      },
+      { "<leader>oc", "<Cmd>ObsidianLinkNew<Cr>", mode = { "n", "v" }, desc = "Create a new note and link it" },
     },
     opts = {
       workspaces = {
