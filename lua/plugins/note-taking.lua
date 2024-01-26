@@ -62,11 +62,11 @@ return {
       -- visual mode
       {
         "<leader>ol",
-        "<Cmd>ObsidianLink<Cr>",
-        mode = { "n", "v" },
+        ":'<,'>ObsidianLink<Cr>",
+        mode = { "v" },
         desc = "Link an inline visual selection of text to note",
       },
-      { "<leader>oc", "<Cmd>ObsidianLinkNew<Cr>", mode = { "n", "v" }, desc = "Create a new note and link it" },
+      { "<leader>on", ":'<,'>ObsidianLinkNew<Cr>", mode = { "v" }, desc = "Create a new note and link it" },
     },
     opts = {
       workspaces = {
