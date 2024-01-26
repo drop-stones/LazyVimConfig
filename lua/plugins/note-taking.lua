@@ -93,6 +93,24 @@ return {
         template = nil,
       },
 
+      note_id_func = function(title)
+        if title ~= nil then
+          -- If title is set, use title as file name
+          return title
+        else
+          local suffix = ""
+          -- If title is nil, just add 4 random uppercase letters to the suffix.
+          for _ = 1, 4 do
+            suffix = suffix .. string.char(math.random(65, 90))
+          end
+          return tostring(os.time()) .. "-" .. suffix
+        end
+      end,
+
+      note_frontmatter_func = function(note)
+        return { id = note.id, tags = note.tags }
+      end,
+
       templates = {
         subdir = "templates",
         date_format = "%Y-%m-%d",
