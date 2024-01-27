@@ -107,8 +107,12 @@ return {
         end
       end,
 
-      note_frontmatter_func = function(note)
-        return { id = note.id, tags = note.tags }
+      disable_frontmatter = function(filename)
+        -- Disable yaml frontmatter for dailies
+        if string.match(filename, "dailies/*") ~= nil then
+          return true
+        end
+        return false
       end,
 
       templates = {
