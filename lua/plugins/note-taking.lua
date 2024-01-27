@@ -62,11 +62,28 @@ return {
       -- visual mode
       {
         "<leader>ol",
-        ":'<,'>ObsidianLink<Cr>",
-        mode = { "v" },
+        function()
+          if vim.fn.mode() ~= "v" then
+            vim.api.nvim_feedkeys("viw", "n", true)
+          end
+          local key = vim.api.nvim_replace_termcodes(":ObsidianLink<CR>", true, false, true)
+          vim.api.nvim_feedkeys(key, "n", true)
+        end,
+        mode = { "n", "v" },
         desc = "Link an inline visual selection of text to note",
       },
-      { "<leader>on", ":'<,'>ObsidianLinkNew<Cr>", mode = { "v" }, desc = "Create a new note and link it" },
+      {
+        "<leader>oc",
+        function()
+          if vim.fn.mode() ~= "v" then
+            vim.api.nvim_feedkeys("viw", "n", true)
+          end
+          local key = vim.api.nvim_replace_termcodes(":ObsidianLinkNew<CR>", true, false, true)
+          vim.api.nvim_feedkeys(key, "n", true)
+        end,
+        mode = { "n", "v" },
+        desc = "Create a new note and link it",
+      },
     },
     opts = {
       workspaces = {
