@@ -19,7 +19,7 @@ if vim.fn.has("win32") or vim.fn.has("win64") then
   end
 end
 
-vim.opt.spelllang = "en_us"
+vim.opt.spelllang = { "en_us", "cjk" }
 vim.opt.spell = true
 
 local has_private_options, private_options = pcall(require, "config.private.options")
