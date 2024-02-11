@@ -4,12 +4,11 @@ return {
     "drop-stones/ime-switch-win.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
-    enabled = function()
-      if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 or vim.fn.has("wsl") == 1 then
-        return true
-      end
-      return false
-    end,
+    opts = {
+      mac = {
+        default_locale = "com.apple.inputmethod.Kotoeri.RomajiTyping.Roman",
+      },
+    },
   },
 
   -- Escape by "jk"
