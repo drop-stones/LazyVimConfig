@@ -1,7 +1,7 @@
 return {
   -- Auto IME switch
   {
-    "drop-stones/ime-switch-win.nvim",
+    "drop-stones/ime-switch.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     opts = {
