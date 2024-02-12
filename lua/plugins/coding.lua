@@ -9,8 +9,7 @@ return {
         default_im = "com.apple.inputmethod.Kotoeri.RomajiTyping.Roman",
       },
       linux = {
-        default_im = "1",
-        switch_im_command = "fcitx-remote -t",
+        switch_to_default_im_command = "fcitx5-remote -c",
       },
     },
   },
