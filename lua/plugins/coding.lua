@@ -1,12 +1,16 @@
 return {
   -- Auto IME switch
   {
-    "drop-stones/ime-switch.nvim",
+    "drop-stones/im-switch.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     opts = {
       mac = {
-        default_locale = "com.apple.inputmethod.Kotoeri.RomajiTyping.Roman",
+        default_im = "com.apple.inputmethod.Kotoeri.RomajiTyping.Roman",
+      },
+      linux = {
+        default_im = "1",
+        switch_im_command = "fcitx-remote -t",
       },
     },
   },
