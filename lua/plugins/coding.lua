@@ -5,11 +5,16 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     opts = {
+      set_previous_im_events = {},
+      save_im_events = {},
+      windows = true,
       mac = {
         default_im = "com.apple.inputmethod.Kotoeri.RomajiTyping.Roman",
       },
       linux = {
-        switch_to_default_im_command = "fcitx5-remote -c",
+        default_im = "keyboard-us",
+        obtain_im_command = "fcitx5-remote -n",
+        set_im_command = "fcitx5-remote -s",
       },
     },
   },
