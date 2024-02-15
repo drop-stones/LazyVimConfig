@@ -13,8 +13,8 @@ return {
       },
       linux = {
         default_im = "keyboard-us",
-        obtain_im_command = "fcitx5-remote -n",
-        set_im_command = "fcitx5-remote -s",
+        obtain_im_command = { "fcitx5-remote", "-n" },
+        set_im_command = { "fcitx5-remote", "-s" },
       },
     },
   },
