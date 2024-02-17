@@ -51,6 +51,12 @@ return {
   -- Improved Yank and Put
   { import = "lazyvim.plugins.extras.coding.yanky" },
 
+  -- Dim inactivate portions of code
+  {
+    "folke/twilight.nvim",
+    event = "VeryLazy",
+  },
+
   -- Zen mode
   {
     "folke/zen-mode.nvim",
