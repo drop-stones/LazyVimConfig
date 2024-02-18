@@ -1,18 +1,100 @@
+local main_logo = {
+  "                                                  ",
+  "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
+  "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
+  "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
+  "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+  "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
+  "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
+}
+
+local sub_logo = {
+  switch = {
+    "▄█▀▀▀█  █████▄",
+    "█    █  ██████",
+    "█ ██ █  ██████",
+    "█    █  ██▀▀██",
+    "█    █  ██▄▄██",
+    "█▄   █  ██████",
+    " ▀▀▀▀▀  ▀▀▀▀▀ ",
+  },
+  pokemon_ball = {
+    "   ▄▄▀▀▀▀▄▄   ",
+    " ▄▀        ▀▄ ",
+    "▄▀          ▀▄",
+    "███▄  ▄▀▀▀▄  █",
+    "▀▄ ▀▀██   █▀█▀",
+    " ▀▄    ▀▀▀ ▄▀ ",
+    "   ▀▀▄▄▄▄▀▀   ",
+  },
+  bulbasaur = {
+    "        ▄▄▀▀▀▄▄  ",
+    "   ▄ ▄▀▀       ▀▄",
+    "  █ ▀█▄         █",
+    "▄█     ▀▀▀▄  ▄▄█ ",
+    "█    ▄▀▀ ▀ ▀▀ ▄ █",
+    " ▀▄▄ ▀   ▄▀  ▄▀▀ ",
+    "    ▀▀▀▀▀▀▄▄▄▀   ",
+  },
+  charmander = {
+    "  ▄▀▀▀▄     ▄▀▄ ",
+    " █     █   ▄▀  █",
+    "█   ▄█  █  ▀▄  █",
+    " ▀▄▄▄  ▄ ▀▄▄▀ █ ",
+    "   █  ▀▄  █ ▄▀  ",
+    "  ▀ ▀█▄▄ ▄█▀    ",
+    "      ▀▄▄▄▀     ",
+  },
+  squirtle = {
+    "  ▄▀▀▀▄▄     ▄▀▀▄ ",
+    " █      █▀▄ █  ▄ █",
+    "█    ▄█    ▀▄ █ ▄▀",
+    " ▀▄▄   ▄▄▀  ▀▄█▀  ",
+    "  ▀▄▀█▀▄▄█   █    ",
+    "    ▀▄█▄▄▄ █▄▀    ",
+    "        ▀▄▄▄▀     ",
+  },
+  pikachu = {
+    "   ▄▀█  ▄▄▄▄▀▀▄",
+    "  ▄▀ ▀▄▀ ▄▀  ▄▀",
+    "▄▀      █▀▄ ▀▄ ",
+    "█▀  ▄█   ██▀▄▀ ",
+    " ▀▄   ▄▀  █▀   ",
+    " ▀▄▀▄▄▄▀▄█     ",
+    "  ▀▀▀▀▄▄▄▀     ",
+  },
+}
+
 return {
   {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
     opts = function()
-      local logo = [[
-███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
-████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
-██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
-██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
-██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
-╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
-            ]]
+      -- Get random element from sub_logo
+      local keyset = {}
+      for k in pairs(sub_logo) do
+        table.insert(keyset, k)
+      end
+      local random_sub_logo = sub_logo[keyset[math.random(#keyset)]]
 
-      logo = string.rep("\n", 8) .. logo .. "\n\n"
+      local logo = {}
+
+      -- Calculate logo
+      for i = 1, #main_logo do
+        local str = string.rep(" ", vim.fn.strdisplaywidth(random_sub_logo[i]) + 4)
+          .. main_logo[i]
+          .. string.rep(" ", 4)
+          .. random_sub_logo[i]
+        table.insert(logo, str)
+      end
+
+      -- Add empty strings
+      for _ = 1, 7 do
+        table.insert(logo, 1, "")
+      end
+      for _ = 1, 2 do
+        table.insert(logo, "")
+      end
 
       local opts = {
         theme = "doom",
@@ -22,7 +104,7 @@ return {
           statusline = false,
         },
         config = {
-          header = vim.split(logo, "\n"),
+          header = logo,
           -- stylua: ignore
           center = {
             { action = "Telescope find_files",                                     desc = " Find file",       icon = " ", key = "f" },
