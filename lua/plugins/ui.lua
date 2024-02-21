@@ -1,3 +1,17 @@
+local colors = require("tokyonight.colors").setup()
+local util = require("tokyonight.util")
+
+local black = "#000000"
+local white = util.darken("#ffffff", 0.7)
+local red = util.darken(colors.red1, 0.7)
+local green = util.darken(colors.green, 0.5)
+vim.api.nvim_set_hl(0, "FgBlueBgRed", { fg = colors.blue, bg = red })
+vim.api.nvim_set_hl(0, "FgBlueBgWhite", { fg = colors.blue, bg = white })
+vim.api.nvim_set_hl(0, "FgWhite", { fg = white })
+vim.api.nvim_set_hl(0, "FgBlackBgWhite", { fg = black, bg = white })
+vim.api.nvim_set_hl(0, "FgRed", { fg = red })
+vim.api.nvim_set_hl(0, "FgGreen", { fg = green })
+
 local header = {
   switch = {
     logo = {
@@ -26,14 +40,36 @@ local header = {
   bulbasaur = {
     logo = {
       "                                                                                     ▄▄▀▀▀▄▄  ",
-      "                      ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗        ▄ ▄▀▀       ▀▄",
-      "                      ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║       █ ▀█▄         █",
+      "                      ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗        ▄ ▄▀▀ ▄█ █  ▀▄",
+      "                      ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║       █ ▀█▄▄▀▄▀  ▀█ █",
       "                      ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║     ▄█     ▀▀▀▄  ▄▄█ ",
-      "                      ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║     █    ▄▀▀ ▀ ▀▀ ▄ █",
-      "                      ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║      ▀▄▄ ▀   ▄▀  ▄▀▀ ",
+      "                      ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║     █    ▄▀▀▄▀ ▀▀ ▄▄█",
+      "                      ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║      ▀▄▄ ▀▀▀ ▄▀  ▄▀▀ ",
       "                      ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝         ▀▀▀▀▀▀▄▄▄▀   ",
     },
-    hl = "AlphaHeader",
+    hl = {
+      { { "AlphaHeader", 0, 110 } },
+      { { "AlphaHeader", 0, 173 }, { "FgGreen", 174, 185 }, { "AlphaHeader", 186, 192 } },
+      { { "AlphaHeader", 0, 181 }, { "FgGreen", 182, 202 }, { "AlphaHeader", 203, 206 } },
+      { { "AlphaHeader", 0, 196 } },
+      {
+        { "AlphaHeader", 0, 176 },
+        { "BgRed", 177, 179 },
+        { "BgWhite", 180, 182 },
+        { "FgWhite", 183, 185 },
+        { "AlphaHeader", 186, 199 },
+        { "FgWhite", 200, 202 },
+        { "AlphaHeader", 203, 205 },
+      },
+      { { "AlphaHeader", 0, 182 }, { "FgRed", 183, 185 }, { "FgWhite", 186, 188 }, { "AlphaHeader", 189, 205 } },
+      {
+        { "AlphaHeader", 0, 174 },
+        { "BgWhite", 175, 177 },
+        { "AlphaHeader", 178, 180 },
+        { "BgWhite", 181, 183 },
+        { "AlphaHeader", 184, 190 },
+      },
+    },
   },
   charmander = {
     logo = {
