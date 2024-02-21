@@ -1,16 +1,21 @@
 local colors = require("tokyonight.colors").setup()
 local util = require("tokyonight.util")
 
+local default_color = colors.blue
 local black = "#000000"
 local white = util.darken("#ffffff", 0.7)
 local red = util.darken(colors.red1, 0.7)
 local green = util.darken(colors.green, 0.5)
-vim.api.nvim_set_hl(0, "FgBlueBgRed", { fg = colors.blue, bg = red })
-vim.api.nvim_set_hl(0, "FgBlueBgWhite", { fg = colors.blue, bg = white })
+local orange = util.darken(colors.orange, 0.7)
+local yellow = util.darken(colors.yellow, 0.7)
+vim.api.nvim_set_hl(0, "BgRed", { fg = default_color, bg = red })
+vim.api.nvim_set_hl(0, "BgWhite", { fg = default_color, bg = white })
+vim.api.nvim_set_hl(0, "BgYellow", { fg = default_color, bg = yellow })
 vim.api.nvim_set_hl(0, "FgWhite", { fg = white })
 vim.api.nvim_set_hl(0, "FgBlackBgWhite", { fg = black, bg = white })
 vim.api.nvim_set_hl(0, "FgRed", { fg = red })
 vim.api.nvim_set_hl(0, "FgGreen", { fg = green })
+vim.api.nvim_set_hl(0, "FgOrangeBgRed", { fg = orange, bg = red })
 
 local header = {
   switch = {
@@ -74,14 +79,43 @@ local header = {
   charmander = {
     logo = {
       "                                                                              ▄▀▀▀▄     ▄▀▄ ",
-      "                     ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗      █     █   ▄▀  █",
+      "                     ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗      █     █   ▄▀▄ █",
       "                     ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║     █   ▄█  █  ▀▄  █",
       "                     ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║      ▀▄▄▄  ▄ ▀▄▄▀ █ ",
       "                     ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║        █  ▀▄  █ ▄▀  ",
-      "                     ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║       ▀ ▀█▄▄ ▄█▀    ",
+      "                     ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║       ▀▀▀█▄▄ ▄█▀    ",
       "                     ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝           ▀▄▄▄▀     ",
     },
-    hl = "AlphaHeader",
+    -- hl = "AlphaHeader",
+    hl = {
+      { { "AlphaHeader", 0, 102 }, { "BgRed", 103, 105 }, { "AlphaHeader", 106, 200 } },
+      {
+        { "AlphaHeader", 0, 173 },
+        { "BgRed", 174, 176 },
+        { "FgOrangeBgRed", 177, 179 },
+        { "BgRed", 180, 182 },
+        { "AlphaHeader", 183, 200 },
+      },
+      {
+        { "AlphaHeader", 0, 171 },
+        { "BgWhite", 172, 174 },
+        { "AlphaHeader", 175, 186 },
+        { "BgRed", 187, 189 },
+        { "BgYellow", 189, 190 },
+        { "BgRed", 190, 192 },
+        { "AlphaHeader", 193, 199 },
+      },
+      { { "AlphaHeader", 0, 200 } },
+      { { "AlphaHeader", 0, 200 } },
+      { { "AlphaHeader", 0, 172 }, { "FgWhite", 173, 175 }, { "AlphaHeader", 176, 200 } },
+      {
+        { "AlphaHeader", 0, 160 },
+        { "BgWhite", 161, 163 },
+        { "AlphaHeader", 164, 166 },
+        { "BgWhite", 167, 169 },
+        { "AlphaHeader", 170, 200 },
+      },
+    },
   },
   squirtle = {
     logo = {
