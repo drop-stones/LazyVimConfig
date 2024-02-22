@@ -1,7 +1,7 @@
 local colors = require("tokyonight.colors").setup()
 local util = require("tokyonight.util")
 
-local default_color = colors.blue
+local default_color = util.darken(colors.blue, 0.5)
 local black = "#000000"
 local white = util.darken("#ffffff", 0.7)
 local red = util.darken(colors.red1, 0.7)
@@ -9,6 +9,7 @@ local green = util.darken(colors.green, 0.5)
 local orange = util.darken(colors.orange, 0.7)
 local yellow = util.darken(colors.yellow, 0.7)
 local brown = util.darken("#714423", 0.7)
+vim.api.nvim_set_hl(0, "AlphaLogo", { fg = default_color })
 vim.api.nvim_set_hl(0, "BgRed", { fg = default_color, bg = red })
 vim.api.nvim_set_hl(0, "BgWhite", { fg = default_color, bg = white })
 vim.api.nvim_set_hl(0, "BgYellow", { fg = default_color, bg = yellow })
@@ -33,7 +34,15 @@ local header = {
       "                   ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║     █▄   █  ██████",
       "                   ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝      ▀▀▀▀▀  ▀▀▀▀▀ ",
     },
-    hl = "AlphaHeader",
+    hl = {
+      { { "AlphaLogo", 0, 200 } },
+      { { "AlphaHeader", 0, 151 }, { "AlphaLogo", 152, 200 } },
+      { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 200 } },
+      { { "AlphaHeader", 0, 155 }, { "AlphaLogo", 156, 200 } },
+      { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 200 } },
+      { { "AlphaHeader", 0, 163 }, { "AlphaLogo", 164, 200 } },
+      { { "AlphaHeader", 0, 147 }, { "AlphaLogo", 148, 200 } },
+    },
   },
   pokemon_ball = {
     logo = {
@@ -45,7 +54,15 @@ local header = {
       "                   ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║      ▀▄    ▀▀▀ ▄▀ ",
       "                   ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝        ▀▀▄▄▄▄▀▀   ",
     },
-    hl = "AlphaHeader",
+    hl = {
+      { { "AlphaLogo", 0, 200 } },
+      { { "AlphaHeader", 0, 151 }, { "AlphaLogo", 152, 200 } },
+      { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 200 } },
+      { { "AlphaHeader", 0, 155 }, { "AlphaLogo", 156, 200 } },
+      { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 200 } },
+      { { "AlphaHeader", 0, 163 }, { "AlphaLogo", 164, 200 } },
+      { { "AlphaHeader", 0, 147 }, { "AlphaLogo", 148, 200 } },
+    },
   },
   bulbasaur = {
     logo = {
@@ -58,26 +75,34 @@ local header = {
       "                      ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝         ▀▀▀▀▀▀▄▄▄▀   ",
     },
     hl = {
-      { { "AlphaHeader", 0, 110 } },
-      { { "AlphaHeader", 0, 173 }, { "FgGreen", 174, 185 }, { "AlphaHeader", 186, 192 } },
-      { { "AlphaHeader", 0, 181 }, { "FgGreen", 182, 202 }, { "AlphaHeader", 203, 206 } },
-      { { "AlphaHeader", 0, 196 } },
+      { { "AlphaLogo", 0, 110 } },
+      { { "AlphaHeader", 0, 151 }, { "AlphaLogo", 152, 173 }, { "FgGreen", 174, 185 }, { "AlphaLogo", 186, 192 } },
+      { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 181 }, { "FgGreen", 182, 202 }, { "AlphaLogo", 203, 206 } },
+      { { "AlphaHeader", 0, 155 }, { "AlphaLogo", 156, 196 } },
       {
-        { "AlphaHeader", 0, 176 },
+        { "AlphaHeader", 0, 161 },
+        { "AlphaLogo", 162, 176 },
         { "BgRed", 177, 179 },
         { "BgWhite", 180, 182 },
         { "FgWhite", 183, 185 },
-        { "AlphaHeader", 186, 199 },
+        { "AlphaLogo", 186, 199 },
         { "FgWhite", 200, 202 },
-        { "AlphaHeader", 203, 205 },
+        { "AlphaLogo", 203, 205 },
       },
-      { { "AlphaHeader", 0, 182 }, { "FgRed", 183, 185 }, { "FgWhite", 186, 188 }, { "AlphaHeader", 189, 205 } },
       {
-        { "AlphaHeader", 0, 174 },
+        { "AlphaHeader", 0, 163 },
+        { "AlphaLogo", 164, 182 },
+        { "FgRed", 183, 185 },
+        { "FgWhite", 186, 188 },
+        { "AlphaLogo", 189, 205 },
+      },
+      {
+        { "AlphaHeader", 0, 147 },
+        { "AlphaLogo", 148, 174 },
         { "BgWhite", 175, 177 },
-        { "AlphaHeader", 178, 180 },
+        { "AlphaLogo", 178, 180 },
         { "BgWhite", 181, 183 },
-        { "AlphaHeader", 184, 190 },
+        { "AlphaLogo", 184, 190 },
       },
     },
   },
@@ -92,32 +117,35 @@ local header = {
       "                     ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝           ▀▄▄▄▀     ",
     },
     hl = {
-      { { "AlphaHeader", 0, 102 }, { "BgRed", 103, 105 }, { "AlphaHeader", 106, 200 } },
+      { { "AlphaLogo", 0, 102 }, { "BgRed", 103, 105 }, { "AlphaLogo", 106, 200 } },
       {
-        { "AlphaHeader", 0, 173 },
+        { "AlphaHeader", 0, 151 },
+        { "AlphaLogo", 152, 173 },
         { "BgRed", 174, 176 },
         { "FgOrangeBgRed", 177, 179 },
         { "BgRed", 180, 182 },
-        { "AlphaHeader", 183, 200 },
+        { "AlphaLogo", 183, 200 },
       },
       {
-        { "AlphaHeader", 0, 171 },
+        { "AlphaHeader", 0, 161 },
+        { "AlphaLogo", 162, 171 },
         { "BgWhite", 172, 174 },
-        { "AlphaHeader", 175, 186 },
+        { "AlphaLogo", 175, 186 },
         { "BgRed", 187, 189 },
         { "BgYellow", 189, 190 },
         { "BgRed", 190, 192 },
-        { "AlphaHeader", 193, 199 },
+        { "AlphaLogo", 193, 199 },
       },
-      { { "AlphaHeader", 0, 200 } },
-      { { "AlphaHeader", 0, 200 } },
-      { { "AlphaHeader", 0, 172 }, { "FgWhite", 173, 175 }, { "AlphaHeader", 176, 200 } },
+      { { "AlphaHeader", 0, 155 }, { "AlphaLogo", 156, 200 } },
+      { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 200 } },
+      { { "AlphaHeader", 0, 163 }, { "AlphaLogo", 164, 172 }, { "FgWhite", 173, 175 }, { "AlphaLogo", 176, 200 } },
       {
-        { "AlphaHeader", 0, 160 },
+        { "AlphaHeader", 0, 147 },
+        { "AlphaLogo", 148, 160 },
         { "BgWhite", 161, 163 },
-        { "AlphaHeader", 164, 166 },
+        { "AlphaLogo", 164, 166 },
         { "BgWhite", 167, 169 },
-        { "AlphaHeader", 170, 200 },
+        { "AlphaLogo", 170, 200 },
       },
     },
   },
@@ -132,36 +160,45 @@ local header = {
       "                       ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝             ▀▄▄▄▀     ",
     },
     hl = {
-      { { "AlphaHeader", 0, 200 } },
-      { { "AlphaHeader", 0, 170 }, { "BgBrown", 171, 173 }, { "AlphaHeader", 174, 200 } },
+      { { "AlphaLogo", 0, 102 }, { "AlphaLogo", 103, 200 } },
+      { { "AlphaHeader", 0, 151 }, { "AlphaLogo", 152, 170 }, { "BgBrown", 171, 173 }, { "AlphaLogo", 174, 200 } },
       {
-        { "AlphaHeader", 0, 170 },
+        { "AlphaHeader", 0, 161 },
+        { "AlphaLogo", 162, 170 },
         { "FgBrown", 171, 173 },
         { "BgWhite", 176, 178 },
         { "BgBrown", 179, 181 },
-        { "AlphaHeader", 182, 184 },
+        { "AlphaLogo", 182, 184 },
         { "FgWhiteBgBrown", 185, 187 },
         { "BgBrown", 188, 190 },
-        { "AlphaHeader", 192, 210 },
+        { "AlphaLogo", 192, 210 },
       },
-      { { "AlphaHeader", 0, 182 }, { "BgWhite", 182, 183 }, { "BgBrown", 183, 187 }, { "AlphaHeader", 188, 200 } },
       {
-        { "AlphaHeader", 0, 181 },
+        { "AlphaHeader", 0, 155 },
+        { "AlphaLogo", 156, 182 },
+        { "BgWhite", 182, 183 },
+        { "BgBrown", 183, 187 },
+        { "AlphaLogo", 188, 200 },
+      },
+      {
+        { "AlphaHeader", 0, 161 },
+        { "AlphaLogo", 162, 181 },
         { "BgYellow", 182, 184 },
-        { "AlphaHeader", 185, 192 },
+        { "AlphaLogo", 185, 192 },
         { "BgWhite", 192, 193 },
         { "BgBrown", 193, 195 },
-        { "AlphaHeader", 197, 210 },
+        { "AlphaLogo", 197, 210 },
       },
       {
-        { "AlphaHeader", 0, 182 },
+        { "AlphaHeader", 0, 163 },
+        { "AlphaLogo", 164, 182 },
         { "BgYellow", 183, 190 },
         { "FgYellow", 191, 193 },
-        { "AlphaHeader", 194, 196 },
+        { "AlphaLogo", 194, 196 },
         { "BgBrown", 197, 199 },
-        { "AlphaHeader", 200, 210 },
+        { "AlphaLogo", 200, 210 },
       },
-      { { "AlphaHeader", 0, 200 } },
+      { { "AlphaHeader", 0, 147 }, { "AlphaLogo", 148, 200 } },
     },
   },
   pikachu = {
@@ -175,19 +212,20 @@ local header = {
       "                    ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝       ▀▀▀▀▄▄▄▀     ",
     },
     hl = {
-      { { "AlphaHeader", 0, 200 } },
-      { { "AlphaHeader", 0, 200 } },
-      { { "AlphaHeader", 0, 166 }, { "BgWhite", 167, 169 }, { "AlphaHeader", 171, 200 } },
+      { { "AlphaLogo", 0, 200 } },
+      { { "AlphaHeader", 0, 151 }, { "AlphaLogo", 152, 200 } },
+      { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 166 }, { "BgWhite", 167, 169 }, { "AlphaLogo", 171, 200 } },
       {
-        { "AlphaHeader", 0, 166 },
+        { "AlphaHeader", 0, 155 },
+        { "AlphaLogo", 156, 166 },
         { "BgWhite", 167, 169 },
-        { "AlphaHeader", 170, 172 },
+        { "AlphaLogo", 170, 172 },
         { "FgRed", 173, 178 },
-        { "AlphaHeader", 179, 200 },
+        { "AlphaLogo", 179, 200 },
       },
-      { { "AlphaHeader", 0, 174 }, { "BgRed", 175, 177 }, { "AlphaHeader", 178, 200 } },
-      { { "AlphaHeader", 0, 200 } },
-      { { "AlphaHeader", 0, 200 } },
+      { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 174 }, { "BgRed", 175, 177 }, { "AlphaLogo", 178, 200 } },
+      { { "AlphaHeader", 0, 163 }, { "AlphaLogo", 164, 200 } },
+      { { "AlphaHeader", 0, 147 }, { "AlphaLogo", 148, 200 } },
     },
   },
 }
