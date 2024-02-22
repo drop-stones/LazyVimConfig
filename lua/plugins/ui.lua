@@ -8,6 +8,7 @@ local red = util.darken(colors.red1, 0.7)
 local green = util.darken(colors.green, 0.5)
 local orange = util.darken(colors.orange, 0.7)
 local yellow = util.darken(colors.yellow, 0.7)
+local brown = util.darken("#714423", 0.7)
 vim.api.nvim_set_hl(0, "BgRed", { fg = default_color, bg = red })
 vim.api.nvim_set_hl(0, "BgWhite", { fg = default_color, bg = white })
 vim.api.nvim_set_hl(0, "BgYellow", { fg = default_color, bg = yellow })
@@ -16,6 +17,10 @@ vim.api.nvim_set_hl(0, "FgBlackBgWhite", { fg = black, bg = white })
 vim.api.nvim_set_hl(0, "FgRed", { fg = red })
 vim.api.nvim_set_hl(0, "FgGreen", { fg = green })
 vim.api.nvim_set_hl(0, "FgOrangeBgRed", { fg = orange, bg = red })
+vim.api.nvim_set_hl(0, "FgBrown", { fg = brown })
+vim.api.nvim_set_hl(0, "BgBrown", { fg = default_color, bg = brown })
+vim.api.nvim_set_hl(0, "FgWhiteBgBrown", { fg = white, bg = brown })
+vim.api.nvim_set_hl(0, "FgYellow", { fg = yellow })
 
 local header = {
   switch = {
@@ -86,7 +91,6 @@ local header = {
       "                     ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║       ▀▀▀█▄▄ ▄█▀    ",
       "                     ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝           ▀▄▄▄▀     ",
     },
-    -- hl = "AlphaHeader",
     hl = {
       { { "AlphaHeader", 0, 102 }, { "BgRed", 103, 105 }, { "AlphaHeader", 106, 200 } },
       {
@@ -121,13 +125,44 @@ local header = {
     logo = {
       "                                                                                ▄▀▀▀▄▄     ▄▀▀▄ ",
       "                       ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗      █      █▀▄ █  ▄ █",
-      "                       ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║     █    ▄█    ▀▄ █ ▄▀",
+      "                       ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║     █▀   ▄▀  ▄ ▀▄ █ ▄▀",
       "                       ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║      ▀▄▄   ▄▄▀  ▀▄█▀  ",
       "                       ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║       ▀▄▀█▀▄▄█   █    ",
-      "                       ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║         ▀▄█▄▄▄ █▄▀    ",
+      "                       ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║         ▀▄█▄▄▄▀█▄▀    ",
       "                       ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝             ▀▄▄▄▀     ",
     },
-    hl = "AlphaHeader",
+    hl = {
+      { { "AlphaHeader", 0, 200 } },
+      { { "AlphaHeader", 0, 170 }, { "BgBrown", 171, 173 }, { "AlphaHeader", 174, 200 } },
+      {
+        { "AlphaHeader", 0, 170 },
+        { "FgBrown", 171, 173 },
+        { "BgWhite", 176, 178 },
+        { "BgBrown", 179, 181 },
+        { "AlphaHeader", 182, 184 },
+        { "FgWhiteBgBrown", 185, 187 },
+        { "BgBrown", 188, 190 },
+        { "AlphaHeader", 192, 210 },
+      },
+      { { "AlphaHeader", 0, 182 }, { "BgWhite", 182, 183 }, { "BgBrown", 183, 187 }, { "AlphaHeader", 188, 200 } },
+      {
+        { "AlphaHeader", 0, 181 },
+        { "BgYellow", 182, 184 },
+        { "AlphaHeader", 185, 192 },
+        { "BgWhite", 192, 193 },
+        { "BgBrown", 193, 195 },
+        { "AlphaHeader", 197, 210 },
+      },
+      {
+        { "AlphaHeader", 0, 182 },
+        { "BgYellow", 183, 190 },
+        { "FgYellow", 191, 193 },
+        { "AlphaHeader", 194, 196 },
+        { "BgBrown", 197, 199 },
+        { "AlphaHeader", 200, 210 },
+      },
+      { { "AlphaHeader", 0, 200 } },
+    },
   },
   pikachu = {
     logo = {
