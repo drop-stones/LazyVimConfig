@@ -3,9 +3,11 @@ local util = require("tokyonight.util")
 
 local default_color = util.darken(colors.blue, 0.5)
 local black = "#000000"
+local grey = util.lighten(black, 0.7)
 local white = util.darken("#ffffff", 0.7)
 local red = util.darken(colors.red1, 0.7)
 local green = util.darken(colors.green, 0.5)
+local light_green = util.lighten(colors.green, 0.7)
 local orange = util.darken(colors.orange, 0.7)
 local yellow = util.darken(colors.yellow, 0.7)
 local brown = util.darken("#714423", 0.7)
@@ -22,6 +24,13 @@ vim.api.nvim_set_hl(0, "FgBrown", { fg = brown })
 vim.api.nvim_set_hl(0, "BgBrown", { fg = default_color, bg = brown })
 vim.api.nvim_set_hl(0, "FgWhiteBgBrown", { fg = white, bg = brown })
 vim.api.nvim_set_hl(0, "FgYellow", { fg = yellow })
+vim.api.nvim_set_hl(0, "FgYellowBgRed", { fg = yellow, bg = red })
+vim.api.nvim_set_hl(0, "FgGrey", { fg = grey })
+vim.api.nvim_set_hl(0, "BgGrey", { fg = default_color, bg = grey })
+vim.api.nvim_set_hl(0, "FgYellowBgGrey", { fg = yellow, bg = grey })
+vim.api.nvim_set_hl(0, "BgLightGreen", { fg = default_color, bg = light_green })
+vim.api.nvim_set_hl(0, "BgGreen", { fg = default_color, bg = green })
+vim.api.nvim_set_hl(0, "FgLightGreenBgGreen", { fg = light_green, bg = green })
 
 local header = {
   switch = {
@@ -235,6 +244,74 @@ local header = {
       { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 174 }, { "BgRed", 175, 177 }, { "AlphaLogo", 178, 200 } },
       { { "AlphaHeader", 0, 163 }, { "AlphaLogo", 164, 200 } },
       { { "AlphaHeader", 0, 147 }, { "AlphaLogo", 148, 200 } },
+    },
+  },
+  cyndaquil = {
+    logo = {
+      "                                                                                   ▄▀▀▀▀▄▄▄  ▄▀█ ▄▀█",
+      "                         ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗       █   ▀▀▀▀ ▀▀  ▀▀ ▄▀",
+      "                         ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║      █   ▀ ▄▄ █▄ █ ▄ ▄█▄",
+      "                         ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║     █  ▀  ▀  ▄▀▀███▄▀ ▄▀",
+      "                         ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║     ▀▄▄▀▀█▄ █▀ ▄▀ ▄▄▄ ▀▄",
+      "                         ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║          ▄▀▀█▀█▄▄██▀▀▀▀▀",
+      "                         ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝          ▀▀▀▀▀▀▄▄▀      ",
+    },
+    hl = {
+      {
+        { "AlphaLogo", 0, 87 },
+        { "BgGrey", 88, 99 },
+        { "AlphaLogo", 100, 113 },
+        { "BgRed", 114, 116 },
+        { "AlphaLogo", 117, 123 },
+        { "BgRed", 124, 196 },
+        { "AlphaLogo", 197, 205 },
+      },
+      {
+        { "AlphaHeader", 0, 156 },
+        { "AlphaLogo", 157, 163 },
+        { "BgGrey", 163, 166 },
+        { "FgGrey", 166, 175 },
+        { "BgGrey", 176, 178 },
+        { "BgRed", 178, 198 },
+        { "AlphaLogo", 199, 205 },
+      },
+      {
+        { "AlphaHeader", 0, 166 },
+        { "AlphaLogo", 167, 172 },
+        { "BgGrey", 172, 176 },
+        { "FgGrey", 177, 179 },
+        { "AlphaLogo", 180, 190 },
+        { "FgYellowBgRed", 191, 202 },
+        { "BgRed", 203, 205 },
+        { "AlphaLogo", 206, 215 },
+      },
+      {
+        { "AlphaHeader", 0, 160 },
+        { "AlphaLogo", 161, 165 },
+        { "BgGrey", 165, 167 },
+        { "FgGrey", 168, 170 },
+        { "AlphaLogo", 171, 181 },
+        { "BgGrey", 182, 184 },
+        { "FgYellowBgGrey", 185, 187 },
+        { "FgYellowBgRed", 188, 203 },
+        { "BgRed", 204, 206 },
+        { "AlphaLogo", 206, 208 },
+      },
+      {
+        { "AlphaHeader", 0, 166 },
+        { "AlphaLogo", 167, 172 },
+        { "BgGrey", 173, 175 },
+        { "AlphaLogo", 176, 198 },
+        { "BgGrey", 199, 201 },
+        { "FgGrey", 202, 203 },
+        { "BgGrey", 203, 205 },
+        { "BgYellow", 206, 208 },
+        { "FgYellowBgRed", 209, 214 },
+        { "BgRed", 215, 218 },
+        { "AlphaLogo", 219, 221 },
+      },
+      { { "AlphaHeader", 0, 168 }, { "AlphaLogo", 169, 221 } },
+      { { "AlphaHeader", 0, 152 }, { "AlphaLogo", 153, 205 } },
     },
   },
 }
