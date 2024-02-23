@@ -36,6 +36,8 @@ vim.api.nvim_set_hl(0, "BgPink", { fg = default_color, bg = pink })
 vim.api.nvim_set_hl(0, "FgPink", { fg = pink })
 vim.api.nvim_set_hl(0, "FgPinkBgWhite", { fg = pink, bg = white })
 vim.api.nvim_set_hl(0, "FgRedBgPink", { fg = red, bg = pink })
+vim.api.nvim_set_hl(0, "FgWhiteBgRed", { fg = white, bg = red })
+vim.api.nvim_set_hl(0, "FgBrownBgYellow", { fg = brown, bg = yellow })
 
 local header = {
   switch = {
@@ -365,6 +367,59 @@ local header = {
       },
       { { "AlphaHeader", 0, 168 }, { "AlphaLogo", 169, 221 } },
       { { "AlphaHeader", 0, 152 }, { "AlphaLogo", 153, 205 } },
+    },
+  },
+  totodile = {
+    logo = {
+      "                                                                                ▄▀█▄▀▀▀▄      ",
+      "                      ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗        █  ▀▄█▄█▀█    ",
+      "                      ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║     ▄▀▀   ███▀█▄█▄   ",
+      "                      ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║     █ ▀ ▄▄▄▄   █ █▀██",
+      "                      ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║      ▀▀█▀ ▄▄▀   ██▀▄▀",
+      "                      ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║        ▄██▀▄▄▄█▄▄█▄▀ ",
+      "                      ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝       ▀▄▄██▄█▀▄▄█▀   ",
+    },
+    hl = {
+      { { "AlphaLogo", 0, 200 } },
+      {
+        { "AlphaHeader", 0, 152 },
+        { "AlphaLogo", 153, 170 },
+        { "FgWhite", 171, 176 },
+        { "BgRed", 177, 182 },
+        { "AlphaLogo", 183, 201 },
+      },
+      {
+        { "AlphaHeader", 0, 162 },
+        { "AlphaLogo", 163, 184 },
+        { "FgRed", 185, 187 },
+        { "FgWhite", 188, 190 },
+        { "BgRed", 191, 196 },
+        { "AlphaLogo", 197, 201 },
+      },
+      {
+        { "AlphaHeader", 0, 156 },
+        { "AlphaLogo", 157, 174 },
+        { "FgWhite", 175, 177 },
+        { "AlphaLogo", 178, 183 },
+        { "BgRed", 184, 200 },
+      },
+      {
+        { "AlphaHeader", 0, 162 },
+        { "AlphaLogo", 163, 176 },
+        { "BgRed", 177, 180 },
+        { "FgWhiteBgRed", 181, 183 },
+        { "BgRed", 184, 186 },
+        { "AlphaLogo", 187, 210 },
+      },
+      {
+        { "AlphaHeader", 0, 164 },
+        { "AlphaLogo", 165, 180 },
+        { "BgYellow", 181, 183 },
+        { "FgBrownBgYellow", 184, 186 },
+        { "BgBrown", 187, 189 },
+        { "AlphaLogo", 190, 210 },
+      },
+      { { "AlphaHeader", 0, 148 }, { "AlphaLogo", 149, 200 } },
     },
   },
 }
