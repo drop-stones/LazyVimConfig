@@ -7,10 +7,11 @@ local grey = util.lighten(black, 0.7)
 local white = util.darken("#ffffff", 0.7)
 local red = util.darken(colors.red1, 0.7)
 local green = util.darken(colors.green, 0.5)
-local light_green = util.lighten(colors.green, 0.7)
+local light_green = util.darken(colors.green, 0.7)
 local orange = util.darken(colors.orange, 0.7)
 local yellow = util.darken(colors.yellow, 0.7)
 local brown = util.darken("#714423", 0.7)
+local pink = util.darken("#ffbad2", 0.7)
 vim.api.nvim_set_hl(0, "AlphaLogo", { fg = default_color })
 vim.api.nvim_set_hl(0, "BgRed", { fg = default_color, bg = red })
 vim.api.nvim_set_hl(0, "BgWhite", { fg = default_color, bg = white })
@@ -31,6 +32,10 @@ vim.api.nvim_set_hl(0, "FgYellowBgGrey", { fg = yellow, bg = grey })
 vim.api.nvim_set_hl(0, "BgLightGreen", { fg = default_color, bg = light_green })
 vim.api.nvim_set_hl(0, "BgGreen", { fg = default_color, bg = green })
 vim.api.nvim_set_hl(0, "FgLightGreenBgGreen", { fg = light_green, bg = green })
+vim.api.nvim_set_hl(0, "BgPink", { fg = default_color, bg = pink })
+vim.api.nvim_set_hl(0, "FgPink", { fg = pink })
+vim.api.nvim_set_hl(0, "FgPinkBgWhite", { fg = pink, bg = white })
+vim.api.nvim_set_hl(0, "FgRedBgPink", { fg = red, bg = pink })
 
 local header = {
   switch = {
@@ -242,6 +247,54 @@ local header = {
         { "AlphaLogo", 192, 200 },
       },
       { { "AlphaHeader", 0, 161 }, { "AlphaLogo", 162, 174 }, { "BgRed", 175, 177 }, { "AlphaLogo", 178, 200 } },
+      { { "AlphaHeader", 0, 163 }, { "AlphaLogo", 164, 200 } },
+      { { "AlphaHeader", 0, 147 }, { "AlphaLogo", 148, 200 } },
+    },
+  },
+  chikorita = {
+    logo = {
+      "                                                                               ▄▄▀▀▀▄▄  ",
+      "                   ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗       ▄▀██▀▀▀ ▄▄▀ ",
+      "                   ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║     ▄▀   ▀▀▀█▀    ",
+      "                   ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║     █▄   ▄▄  █    ",
+      "                   ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║     ▀▄ ▄ ▀▀▀▀ ▀▄▀█",
+      "                   ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║      █ ▄ ▄ ▀ ▄  ▀█",
+      "                   ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝       ▀▀▀▄▄▀▄▀▄█▄▀",
+    },
+    hl = {
+      { { "AlphaLogo", 0, 86 }, { "BgLightGreen", 87, 89 }, { "BgGreen", 90, 95 }, { "AlphaLogo", 96, 110 } },
+      {
+        { "AlphaHeader", 0, 151 },
+        { "AlphaLogo", 152, 164 },
+        { "FgLightGreenBgGreen", 165, 177 },
+        { "BgGreen", 178, 183 },
+        { "AlphaLogo", 184, 200 },
+      },
+      {
+        { "AlphaHeader", 0, 161 },
+        { "AlphaLogo", 162, 166 },
+        { "BgWhite", 167, 168 },
+        { "FgGreen", 172, 174 },
+        { "AlphaLogo", 175, 200 },
+      },
+      {
+        { "AlphaHeader", 0, 155 },
+        { "AlphaLogo", 156, 160 },
+        { "FgRedBgPink", 160, 162 },
+        { "AlphaLogo", 163, 165 },
+        { "FgRed", 166, 168 },
+        { "FgPinkBgWhite", 169, 171 },
+        { "BgWhite", 171, 172 },
+        { "AlphaLogo", 173, 200 },
+      },
+      {
+        { "AlphaHeader", 0, 161 },
+        { "AlphaLogo", 162, 174 },
+        { "FgRed", 175, 177 },
+        { "FgPink", 178, 180 },
+        { "FgWhite", 181, 183 },
+        { "AlphaLogo", 184, 200 },
+      },
       { { "AlphaHeader", 0, 163 }, { "AlphaLogo", 164, 200 } },
       { { "AlphaHeader", 0, 147 }, { "AlphaLogo", 148, 200 } },
     },
