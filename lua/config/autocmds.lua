@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- commentstring
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "cpp" },
+  pattern = { "c", "cpp", "cs" },
   callback = function()
     vim.bo.commentstring = "// %s"
   end,
