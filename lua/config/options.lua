@@ -22,4 +22,6 @@ end
 vim.opt.spelllang = { "en_us", "cjk" }
 vim.opt.spell = true
 
+vim.lsp.set_log_level("ERROR")
+
 local has_private_options, private_options = pcall(require, "config.private.options")
