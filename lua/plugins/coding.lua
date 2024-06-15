@@ -28,10 +28,11 @@ return {
     "TheBlob42/houdini.nvim",
     event = "VeryLazy",
     opts = {
-      mapping = { "jk", "ｊｋ" },
+      mappings = { "jk" },
       timeout = 150,
+      check_modified = true,
       escape_sequences = {
-        ["t"] = function(_, _)
+        ["t"] = function(_, _, _, _)
           if vim.opt.filetype:get() == "lazyterm" then
             return "<BS><BS><ESC>" -- <BS> is needed when entering commit messages
           end
