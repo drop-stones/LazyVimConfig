@@ -26,4 +26,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+-- mini.pairs: Disable "'" auto-pairs in Rust
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "rust" },
+  callback = function()
+    vim.keymap.set("i", "'", "'", { buffer = 0 })
+  end,
+})
+
 local has_private_autocmds, private_autocmds = pcall(require, "config.private.autocmds")
