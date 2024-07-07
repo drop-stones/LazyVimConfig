@@ -23,32 +23,53 @@ return {
     },
   },
 
-  -- Escape by "jk"
-  {
-    "TheBlob42/houdini.nvim",
-    event = "VeryLazy",
-    opts = {
-      mappings = { "jk" },
-      timeout = 150,
-      check_modified = true,
-      escape_sequences = {
-        ["t"] = function(_, _, _, _)
-          if vim.opt.filetype:get() == "lazyterm" then
-            return "<BS><BS><ESC>" -- <BS> is needed when entering commit messages
-          end
-
-          return "<BS><BS><C-\\><C-n>"
-        end,
-      },
-    },
-  },
-
   -- Escape by "ｊｋ" (in double-byte character)
   {
     "max397574/better-escape.nvim",
     event = "VeryLazy",
     opts = {
-      mapping = { "ｊｋ" },
+      mappings = {
+        i = {
+          j = {
+            k = "<Esc>",
+          },
+          ["ｊ"] = {
+            ["ｋ"] = "<Esc>",
+          },
+        },
+        c = {
+          j = {
+            k = "<Esc>",
+          },
+          ["ｊ"] = {
+            ["ｋ"] = "<Esc>",
+          },
+        },
+        t = {
+          j = {
+            k = "<C-\\><C-N>",
+          },
+          ["ｊ"] = {
+            ["ｋ"] = "<C-\\><C-N>",
+          },
+        },
+        v = {
+          j = {
+            k = "<Esc>",
+          },
+          ["ｊ"] = {
+            ["ｋ"] = "<Esc>",
+          },
+        },
+        s = {
+          j = {
+            k = "<Esc>",
+          },
+          ["ｊ"] = {
+            ["ｋ"] = "<Esc>",
+          },
+        },
+      },
       timeout = 150,
     },
   },
