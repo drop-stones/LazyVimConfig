@@ -39,6 +39,12 @@ return {
   -- YAML
   { import = "lazyvim.plugins.extras.lang.yaml" },
 
+  -- TOML
+  { import = "lazyvim.plugins.extras.lang.toml" },
+
+  -- Git
+  { import = "lazyvim.plugins.extras.lang.git" },
+
   -- PowerShell (no parsers are maintained)
   {
     "neovim/nvim-lspconfig",
@@ -100,8 +106,13 @@ return {
 
   -- just
   {
-    "IndianBoy42/tree-sitter-just",
-    ft = { "just" },
-    opts = {},
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "just" } },
+  },
+
+  -- Assembly/LLVM codes
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "asm", "objdump", "llvm" } },
   },
 }
