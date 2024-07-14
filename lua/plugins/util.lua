@@ -1,15 +1,4 @@
 return {
-  -- keymaps
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      defaults = {
-        mode = { "n", "v" },
-        ["<leader>T"] = { name = "+terminal" },
-      },
-    },
-  },
   -- fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
@@ -48,6 +37,15 @@ return {
     end,
   },
   -- terminal
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      spec = {
+        { "<leader>T", group = "terminal" },
+      },
+    },
+  },
   {
     "akinsho/toggleterm.nvim",
     lazy = true,

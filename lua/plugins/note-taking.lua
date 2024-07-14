@@ -1,16 +1,14 @@
 return {
+  -- obsidian
   {
     "folke/which-key.nvim",
     optional = true,
     opts = {
-      defaults = {
-        ["<leader>o"] = { name = "+obsidian" },
-        ["<leader>P"] = { name = "+pomodoro" },
+      spec = {
+        { "<leader>o", group = "obsidian", mode = { "n", "v" } },
       },
     },
   },
-
-  -- obsidian
   {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommend, use latest release instead of latest commit
@@ -59,6 +57,7 @@ return {
       { "<leader>os", "<Cmd>ObsidianSearch<Cr>", desc = "Search for notes" },
       { "<leader>ow", "<Cmd>ObsidianWorkspace<Cr>", desc = "Switch to another workspace" },
       { "<leader>op", "<Cmd>ObsidianPasteImg<Cr>", desc = "Paste an image from clipboard" },
+
       -- visual mode
       {
         "<leader>ol",
@@ -141,6 +140,15 @@ return {
   },
 
   -- pomodoro
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      spec = {
+        { "<leader>P", group = "pomodoro" },
+      },
+    },
+  },
   {
     "epwalsh/pomo.nvim",
     version = "*", -- Recommended, use latest release instead of latest commit

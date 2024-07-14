@@ -3,8 +3,8 @@ return {
     "folke/which-key.nvim",
     optional = true,
     opts = {
-      defaults = {
-        ["<leader>:"] = { name = "+task" },
+      spec = {
+        { "<leader>:", group = "task" },
       },
     },
   },
