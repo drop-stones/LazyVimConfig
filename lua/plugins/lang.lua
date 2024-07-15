@@ -8,16 +8,6 @@ return {
     },
   },
 
-  -- DAP
-  { import = "lazyvim.plugins.extras.dap.core" },
-  {
-    "ldelossa/nvim-dap-projects",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-dap-projects").search_project_config()
-    end,
-  },
-
   -- TreeSitter
   {
     "nvim-treesitter/nvim-treesitter",
