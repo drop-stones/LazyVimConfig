@@ -57,10 +57,4 @@ return {
 
   -- code outline window
   { import = "lazyvim.plugins.extras.editor.aerial" },
-  {
-    "stevearc/aerial.nvim",
-    keys = {
-      { "<leader>a", "<cmd>AerialToggle<cr>", desc = "Toggle the aerial window" },
-    },
-  },
 }
