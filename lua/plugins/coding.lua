@@ -5,6 +5,9 @@ return {
   -- mini-comment
   { import = "lazyvim.plugins.extras.coding.mini-comment" },
 
+  -- mini-suround
+  { import = "lazyvim.plugins.extras.coding.mini-surround" },
+
   -- Improved Yank and Put
   { import = "lazyvim.plugins.extras.coding.yanky" },
 
