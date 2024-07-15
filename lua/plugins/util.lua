@@ -1,4 +1,10 @@
 return {
+  -- project management
+  { import = "lazyvim.plugins.extras.util.project" },
+
+  -- Dot Files
+  { import = "lazyvim.plugins.extras.util.dot" },
+
   -- fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
@@ -127,6 +133,4 @@ return {
       },
     },
   },
-  -- project management
-  { import = "lazyvim.plugins.extras.util.project" },
 }
