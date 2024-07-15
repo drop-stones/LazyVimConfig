@@ -124,12 +124,12 @@ return {
       {
         "<leader>Tn",
         "<cmd>ToggleTermSetName<cr>",
-        desc = "Set term name",
+        desc = "Set terminal name",
       },
       {
         "<leader>Ts",
         "<cmd>TermSelect<cr>",
-        desc = "Select term",
+        desc = "Select terminal",
       },
     },
   },
