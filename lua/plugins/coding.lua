@@ -1,4 +1,13 @@
 return {
+  -- LuaSnip
+  { import = "lazyvim.plugins.extras.coding.luasnip" },
+
+  -- mini-comment
+  { import = "lazyvim.plugins.extras.coding.mini-comment" },
+
+  -- Improved Yank and Put
+  { import = "lazyvim.plugins.extras.coding.yanky" },
+
   -- Auto IME switch
   {
     "drop-stones/im-switch.nvim",
@@ -81,9 +90,6 @@ return {
       },
     },
   },
-
-  -- Improved Yank and Put
-  { import = "lazyvim.plugins.extras.coding.yanky" },
 
   -- Dim inactivate portions of code
   {
