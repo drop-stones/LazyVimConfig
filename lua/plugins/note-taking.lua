@@ -5,7 +5,7 @@ return {
     optional = true,
     opts = {
       spec = {
-        { "<leader>o", group = "obsidian", mode = { "n", "v" } },
+        { "<leader>n", group = "note taking", mode = { "n", "v" } },
       },
     },
   },
@@ -35,32 +35,36 @@ return {
     },
     keys = {
       -- normal mode
-      { "<leader>on", "<Cmd>ObsidianNew<Cr>", desc = "Create a new note" },
-      { "<leader>oo", "<Cmd>ObsidianOpen<Cr>", desc = "Open a note in the Obsidian app" },
-      { "<leader>or", "<Cmd>ObsidianRename<Cr>", desc = "Rename the note of the current buffer" },
-      { "<leader>oq", "<Cmd>ObsidianQuickSwitch<Cr>", desc = "Quickly switch to anther note" },
-      { "<leader>of", "<Cmd>ObsidianFollowLink<Cr>", desc = "Follow a note reference" },
+      { "<leader>nn", "<Cmd>ObsidianNew<Cr>", desc = "Create a new note" },
+      { "<leader>no", "<Cmd>ObsidianOpen<Cr>", desc = "Open a note in the Obsidian app" },
+      { "<leader>nr", "<Cmd>ObsidianRename<Cr>", desc = "Rename the note of the current buffer" },
+      { "<leader>nq", "<Cmd>ObsidianQuickSwitch<Cr>", desc = "Quickly switch to anther note" },
+      { "<leader>nf", "<Cmd>ObsidianFollowLink<Cr>", desc = "Follow a note reference" },
       {
-        "<leader>ov",
+        "<leader>nv",
         "<Cmd>ObsidianFollowLink vsplit<Cr>",
         desc = "Follow a note reference and open in vertical split",
       },
       {
-        "<leader>oh",
+        "<leader>nh",
         "<Cmd>ObsidianFollowLink hsplit<Cr>",
         desc = "Follow a note reference and open in horizontal split",
       },
-      { "<leader>ob", "<Cmd>ObsidianBacklinks<Cr>", desc = "Get a location list of references to the current buffer" },
-      { "<leader>od", "<Cmd>ObsidianToday<Cr>", desc = "Open a new daily note" },
-      { "<leader>oy", "<Cmd>ObsidianYesterday<Cr>", desc = "Open the daily note for yesterday" },
-      { "<leader>ot", "<Cmd>ObsidianTomorrow<Cr>", desc = "Open the daily note for tomorrow" },
-      { "<leader>os", "<Cmd>ObsidianSearch<Cr>", desc = "Search for notes" },
-      { "<leader>ow", "<Cmd>ObsidianWorkspace<Cr>", desc = "Switch to another workspace" },
-      { "<leader>op", "<Cmd>ObsidianPasteImg<Cr>", desc = "Paste an image from clipboard" },
+      {
+        "<leader>nb",
+        "<Cmd>ObsidianBacklinks<Cr>",
+        desc = "Get a location list of references to the current buffer",
+      },
+      { "<leader>nd", "<Cmd>ObsidianToday<Cr>", desc = "Open a new daily note" },
+      { "<leader>ny", "<Cmd>ObsidianYesterday<Cr>", desc = "Open the daily note for yesterday" },
+      { "<leader>nt", "<Cmd>ObsidianTomorrow<Cr>", desc = "Open the daily note for tomorrow" },
+      { "<leader>ns", "<Cmd>ObsidianSearch<Cr>", desc = "Search for notes" },
+      { "<leader>nw", "<Cmd>ObsidianWorkspace<Cr>", desc = "Switch to another workspace" },
+      { "<leader>np", "<Cmd>ObsidianPasteImg<Cr>", desc = "Paste an image from clipboard" },
 
       -- visual mode
       {
-        "<leader>ol",
+        "<leader>nl",
         function()
           if vim.fn.mode() ~= "v" then
             vim.api.nvim_feedkeys("viw", "n", true)
@@ -72,7 +76,7 @@ return {
         desc = "Link an inline visual selection of text to note",
       },
       {
-        "<leader>oc",
+        "<leader>nc",
         function()
           if vim.fn.mode() ~= "v" then
             vim.api.nvim_feedkeys("viw", "n", true)
