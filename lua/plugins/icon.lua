@@ -31,6 +31,7 @@ return {
           { pattern = "widget", icon = "󱍕", color = "cyan" },
           { pattern = "line", icon = "", color = "cyan" },
           { pattern = "keymaps", icon = "", color = "cyan" },
+          { pattern = "misc", icon = "", color = "cyan" },
 
           -- direction
           { pattern = "up", icon = " ", color = direction_color },
@@ -77,6 +78,9 @@ return {
           -- overseer
           { pattern = "overseer", icon = "", color = "cyan" },
           { pattern = "task", icon = "", color = "cyan" },
+
+          -- hardtime.nvim
+          { pattern = "hardtime", icon = "", color = "yellow" },
         },
       },
     },
