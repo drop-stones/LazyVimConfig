@@ -55,6 +55,13 @@ return {
     end,
   },
 
+  -- bigfile.nvim: disable features when editing big files
+  {
+    "LunarVim/bigfile.nvim",
+    event = "BufReadPre",
+    opts = {},
+  },
+
   -- code outline window
   { import = "lazyvim.plugins.extras.editor.aerial" },
 
