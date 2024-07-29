@@ -481,4 +481,7 @@ return {
 
   -- nvim-navic
   { import = "lazyvim.plugins.extras.editor.navic" },
+
+  -- Treesitter-context
+  { import = "lazyvim.plugins.extras.ui.treesitter-context" },
 }
