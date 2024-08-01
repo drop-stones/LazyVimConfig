@@ -1,11 +1,4 @@
 return {
-  -- project management
-  { import = "lazyvim.plugins.extras.util.project" },
-
-  -- Dot Files
-  { import = "lazyvim.plugins.extras.util.dot" },
-
-  -- terminal
   {
     "folke/which-key.nvim",
     optional = true,

@@ -1,25 +1,4 @@
 return {
-  -- file explorer
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    opts = {
-      window = {
-        position = "right",
-        mappings = {
-          ["e"] = function()
-            vim.api.nvim_command("Neotree focus filesystem")
-          end,
-          ["b"] = function()
-            vim.api.nvim_command("Neotree focus buffers")
-          end,
-          ["s"] = function()
-            vim.api.nvim_command("Neotree focus git_status")
-          end,
-        },
-      },
-    },
-  },
-
   -- git diff view
   {
     "sindrets/diffview.nvim",
@@ -54,17 +33,4 @@ return {
       }
     end,
   },
-
-  -- bigfile.nvim: disable features when editing big files
-  {
-    "LunarVim/bigfile.nvim",
-    event = "BufReadPre",
-    opts = {},
-  },
-
-  -- code outline window
-  { import = "lazyvim.plugins.extras.editor.aerial" },
-
-  -- Harpoon2: go to the files you want
-  { import = "lazyvim.plugins.extras.editor.harpoon2" },
 }

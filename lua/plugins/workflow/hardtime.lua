@@ -1,14 +1,4 @@
 return {
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      spec = {
-        { "<leader>m", group = "misc", mode = { "n", "v" } },
-      },
-    },
-  },
-
   -- hardtime.nvim
   {
     "folke/which-key.nvim",
@@ -47,7 +37,4 @@ return {
       },
     },
   },
-
-  -- vim-startuptime
-  { import = "lazyvim.plugins.extras.util.startuptime" },
 }
