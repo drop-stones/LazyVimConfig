@@ -21,6 +21,7 @@ require("lazy").setup({
     { import = "plugins.git" },
     { import = "plugins.keybinding" },
     { import = "plugins.lang" },
+    { import = "plugins.window" }, -- before lsp.aerial
     { import = "plugins.lsp" },
     { import = "plugins.marks" },
     { import = "plugins.motion" },
