@@ -18,6 +18,7 @@ require("lazy").setup({
     { import = "plugins.dap" },
     { import = "plugins.editing_support" },
     { import = "plugins.file_explorer" },
+    { import = "plugins.fuzzy_finder" },
     { import = "plugins.git" },
     { import = "plugins.keybinding" },
     { import = "plugins.lang" },

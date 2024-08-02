@@ -1,4 +1,5 @@
 return {
+  { import = "lazyvim.plugins.extras.editor.telescope" },
   {
     "nvim-telescope/telescope.nvim",
     keys = {
