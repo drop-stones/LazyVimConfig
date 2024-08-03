@@ -15,6 +15,7 @@ require("lazy").setup({
     { import = "plugins.color" },
     { import = "plugins.colorscheme" },
     { import = "plugins.comment" },
+    { import = "plugins.completion" },
     { import = "plugins.dap" },
     { import = "plugins.editing_support" },
     { import = "plugins.fuzzy_finder" },
