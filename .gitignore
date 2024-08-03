@@ -10,3 +10,4 @@ data
 lazy-lock.json
 lazyvim.json
 lua/config/private
+lua/plugins/private

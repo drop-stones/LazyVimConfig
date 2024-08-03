@@ -36,6 +36,7 @@ require("lazy").setup({
     { import = "plugins.test" },
     { import = "plugins.timer" },
     { import = "plugins.workflow" },
+    { import = "plugins.private" },
     { import = "plugins.post_process" },
   },
   defaults = {
