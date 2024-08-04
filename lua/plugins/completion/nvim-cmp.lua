@@ -34,6 +34,12 @@ return {
           LazyVim.confirm({ behavior = require("cmp").ConfirmBehavior.Replace, select = false })(fallback)
         end, { "i", "s" }),
       })
+
+      opts.window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      }
+
       opts.preselect = require("cmp").PreselectMode.None
       opts.completion = { completeopt = "menu,menuone,noselect" } -- disable preslect for LSPs
     end,
