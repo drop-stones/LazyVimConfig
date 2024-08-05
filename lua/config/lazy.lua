@@ -20,6 +20,7 @@ require("lazy").setup({
     { import = "plugins.editing_support" },
     { import = "plugins.fuzzy_finder" },
     { import = "plugins.git" },
+    { import = "plugins.indent" },
     { import = "plugins.keybinding" },
     { import = "plugins.lang" },
     { import = "plugins.window" }, -- before lsp.aerial
