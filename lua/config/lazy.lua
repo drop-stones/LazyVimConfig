@@ -30,6 +30,7 @@ require("lazy").setup({
     { import = "plugins.note_taking" },
     { import = "plugins.startup" }, -- before project
     { import = "plugins.project" },
+    { import = "plugins.search" },
     { import = "plugins.snippet" },
     { import = "plugins.statusline" },
     { import = "plugins.syntax" },
