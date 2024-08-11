@@ -18,7 +18,6 @@ require("lazy").setup({
     { import = "plugins.completion" },
     { import = "plugins.dap" },
     { import = "plugins.editing_support" },
-    { import = "plugins.fuzzy_finder" },
     { import = "plugins.git" },
     { import = "plugins.indent" },
     { import = "plugins.keybinding" },
@@ -29,6 +28,7 @@ require("lazy").setup({
     { import = "plugins.motion" },
     { import = "plugins.note_taking" },
     { import = "plugins.startup" }, -- before project
+    { import = "plugins.fuzzy_finder" }, -- after startup
     { import = "plugins.project" },
     { import = "plugins.search" },
     { import = "plugins.snippet" },
