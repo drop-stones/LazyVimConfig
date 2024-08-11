@@ -1,3 +1,17 @@
+---@class telescope-git-grep.Opts: table<string, any>
+---@field cwd? string
+---@field regex? string
+---@field skip_binary_files? boolean
+---@field use_git_root? boolean
+
+---@type telescope-git-grep.Opts
+local default_opts = {
+  cwd = "%:h:p",
+  regex = "extended",
+  skip_binary_files = true,
+  use_git_root = true,
+}
+
 ---@param opts lazyvim.util.pick.Opts?
 ---@return boolean
 local in_worktree = function(opts)
@@ -8,13 +22,14 @@ local in_worktree = function(opts)
 end
 
 ---@param opts lazyvim.util.pick.Opts?
----@return table
-local convert_lazyvim_to_gitgrep_opts = function(opts)
+---@return telescope-git-grep.Opts
+local setup_gitgrep_opts = function(opts)
   opts = opts or {}
-  return {
+  local user_opts = {
     cwd = opts.cwd,
     use_git_root = opts.root,
   }
+  return vim.tbl_extend("force", default_opts, user_opts)
 end
 
 ---@param opts lazyvim.util.pick.Opts?
@@ -23,7 +38,7 @@ local live_grep = function(opts)
   opts = opts or {}
   if in_worktree(opts) then
     return function()
-      require("git_grep").live_grep(convert_lazyvim_to_gitgrep_opts(opts))
+      require("git_grep").live_grep(setup_gitgrep_opts(opts))
     end
   else
     return require("lazyvim.util").pick("live_grep", opts)
@@ -36,7 +51,7 @@ local grep_string = function(opts)
   opts = opts or {}
   if in_worktree(opts) then
     return function()
-      require("git_grep").grep(convert_lazyvim_to_gitgrep_opts(opts))
+      require("git_grep").grep(setup_gitgrep_opts(opts))
     end
   else
     return require("lazyvim.util").pick("grep_string", opts)
@@ -58,12 +73,7 @@ return {
     },
     opts = {
       extensions = {
-        git_grep = {
-          cwd = "%:h:p",
-          regex = "extended",
-          skip_binary_files = true,
-          use_git_root = true,
-        },
+        git_grep = default_opts,
       },
     },
     keys = function(_, keys)
