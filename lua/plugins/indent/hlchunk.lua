@@ -18,9 +18,15 @@ return {
         style = color,
         duration = 20,
         delay = 20,
+        exclude_filetypes = {
+          fzf = true,
+        },
       },
       indent = {
         enable = true,
+        exclude_filetypes = {
+          fzf = true,
+        },
       },
     },
   },
