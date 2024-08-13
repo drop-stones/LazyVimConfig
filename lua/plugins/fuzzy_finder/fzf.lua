@@ -1,3 +1,4 @@
+local func = require("vim.func")
 ---@param opts lazyvim.util.pick.Opts?
 ---@return boolean
 local in_worktree = function(opts)
@@ -6,35 +7,50 @@ local in_worktree = function(opts)
   return require("util.command").get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" }, cwd)[1]
 end
 
---- Setup git_grep options for fzf-lua commands
+--- Setup options for fzf-lua commands
 ---@param opts lazyvim.util.pick.Opts?
+---@param is_gitgrep boolean
+---@param search_string string?
 ---@return table
-local setup_gitgrep_opts = function(opts)
-  -- get cwd
-  opts = opts or {}
-  local cwd = vim.F.if_nil(opts.cwd, vim.uv.cwd())
-  if opts.root ~= false then
-    local git_root, _, _ = require("util.command").get_os_command_output({ "git", "rev-parse", "--show-toplevel" }, cwd)
-    cwd = git_root[1]
+local setup_opts = function(opts, is_gitgrep, search_string)
+  -- title
+  local title = (is_gitgrep and "Git Grep") or "Grep"
+  if search_string then
+    title = title .. " (" .. search_string:gsub("\n", "\\n") .. ")"
   end
-  -- return options
-  return {
-    cmd = "git grep --line-number --column --color=always",
-    winopts = { title = "Git Grep" },
-    cwd = cwd,
-  }
+
+  if is_gitgrep then
+    -- cwd
+    local cwd = opts.cwd or vim.uv.cwd()
+    if opts.root ~= false then
+      local git_root, _, _ =
+        require("util.command").get_os_command_output({ "git", "rev-parse", "--show-toplevel" }, cwd)
+      cwd = git_root[1]
+    end
+    -- return options
+    return {
+      cmd = "git grep --line-number --column --color=always",
+      winopts = { title = title },
+      cwd = cwd,
+    }
+  else
+    ---@type table
+    local fzf_opts = (opts and vim.deepcopy(opts)) or {}
+    fzf_opts.winopts = { title = title }
+    return fzf_opts
+  end
 end
 
 ---@param opts lazyvim.util.pick.Opts?
 ---@return function
 local live_grep = function(opts)
   opts = opts or {}
-  if in_worktree(opts) then
-    return function()
-      require("fzf-lua").live_grep(setup_gitgrep_opts(opts))
+  return function()
+    if in_worktree(opts) then
+      require("fzf-lua").live_grep(setup_opts(opts, true))
+    else
+      require("lazyvim.util").pick("live_grep", setup_opts(opts, false))()
     end
-  else
-    return require("lazyvim.util").pick("live_grep", opts)
   end
 end
 
@@ -42,12 +58,13 @@ end
 ---@return function
 local grep_cword = function(opts)
   opts = opts or {}
-  if in_worktree(opts) then
-    return function()
-      require("fzf-lua").grep_cword(setup_gitgrep_opts(opts))
+  return function()
+    local search_string = vim.fn.expand("<cword>")
+    if in_worktree(opts) then
+      require("fzf-lua").grep_cword(setup_opts(opts, true, search_string))
+    else
+      require("lazyvim.util").pick("grep_cword", setup_opts(opts, false, search_string))()
     end
-  else
-    return require("lazyvim.util").pick("grep_cword", opts)
   end
 end
 
@@ -55,12 +72,13 @@ end
 ---@return function
 local grep_visual = function(opts)
   opts = opts or {}
-  if in_worktree(opts) then
-    return function()
-      require("fzf-lua").grep_visual(setup_gitgrep_opts(opts))
+  return function()
+    local search_string, _ = require("fzf-lua.utils").get_visual_selection()
+    if in_worktree(opts) then
+      require("fzf-lua").grep_visual(setup_opts(opts, true, search_string))
+    else
+      require("lazyvim.util").pick("grep_visual", setup_opts(opts, false, search_string))()
     end
-  else
-    return require("lazyvim.util").pick("grep_visual", opts)
   end
 end
 
