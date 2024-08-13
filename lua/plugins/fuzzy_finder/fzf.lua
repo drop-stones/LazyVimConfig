@@ -41,6 +41,11 @@ return {
         end,
       }
 
+      -- grep
+      opts.grep = {
+        live_ast_prefix = false, -- remove '*' from prompt
+      }
+
       return vim.tbl_deep_extend("force", fzf_opts, opts)
     end,
   },
