@@ -113,15 +113,14 @@ return {
         on_create = function()
           for _, keybind in ipairs(keymap) do
             vim.keymap.set("n", keybind.key, function()
-              vim.cmd("startinsert")
-              vim.api.nvim_input(keybind.action)
-              if (keybind.insert == nil) or (keybind.insert ~= true) then
-                vim.schedule(function()
-                  vim.cmd("stopinsert")
-                end)
+              if keybind.insert then
+                return "i" .. keybind.action
+              else
+                return "i" .. keybind.action .. "<C-\\><C-N>" .. "l" -- "l" is to not move the cursor position
               end
-            end, { buffer = true })
+            end, { buffer = true, expr = true, remap = true })
           end
+          vim.api.nvim_set_option_value("cursorline", false, { scope = "local" }) -- disable search window highlighting
         end,
       }
 
