@@ -14,9 +14,9 @@ end
 ---@return table
 local setup_opts = function(opts, is_gitgrep, search_string)
   -- title
-  local title = (is_gitgrep and "Git Grep") or "Grep"
+  local title = (is_gitgrep and " Git Grep ") or " Grep "
   if search_string then
-    title = title .. " (" .. search_string:gsub("\n", "\\n") .. ")"
+    title = title .. "(" .. search_string:gsub("\n", "\\n") .. ") "
   end
 
   if is_gitgrep then
