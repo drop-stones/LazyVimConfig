@@ -124,9 +124,76 @@ return {
         end,
       }
 
+      -- files
+      opts.files = {
+        headers = false, -- hide cwd/action headers
+      }
+
+      -- git
+      opts.git = {
+        files = {
+          headers = false, -- hide cwd/action headers
+        },
+        status = {
+          headers = false, -- hide action headers
+        },
+        commit = {
+          headers = false, -- hide action headers
+        },
+        bcommits = {
+          headers = false, -- hide action headers
+        },
+        branches = {
+          headers = false, -- hide action headers
+        },
+        tags = {
+          headers = false, -- hide action headers
+        },
+        stash = {
+          headers = false, -- hide action headers
+        },
+      }
+
       -- grep
       opts.grep = {
+        headers = false, -- hide headers
         live_ast_prefix = false, -- remove '*' from prompt
+      }
+
+      -- args
+      opts.args = {
+        headers = false, -- hide headers
+      }
+
+      -- oldfiles
+      opts.oldfiles = {
+        headers = false, -- hide headers
+      }
+
+      -- buffers
+      opts.buffers = {
+        headers = false, -- hide headers
+      }
+
+      -- tabs
+      opts.tabs = {
+        headers = false, -- hide headers
+      }
+
+      -- lines
+      opts.lines = {
+        headers = false, -- hide headers
+      }
+
+      -- previewer
+      opts.previewers = {
+        builtin = {
+          extensions = {
+            ["png"] = { "viu", "-b" },
+            ["jpg"] = { "viu", "-b" },
+            ["svg"] = { "chafa", "-f", "symbols" },
+          },
+        },
       }
 
       return vim.tbl_deep_extend("force", fzf_opts, opts)
