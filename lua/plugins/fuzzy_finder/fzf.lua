@@ -231,6 +231,10 @@ return {
         { "<leader>fF", find_files({ root = false }), desc = "Find Files (cwd)" },
       }
 
+      local remove_keys = {
+        { "<leader>fg" },
+      }
+
       local keys = {}
       for _, v in ipairs(fzf_keys) do
         local overwrite = false
@@ -240,7 +244,14 @@ return {
           end
         end
 
-        if overwrite == false then
+        local remove = false
+        for _, remove_key in ipairs(remove_keys) do
+          if v[1] == remove_key[1] then
+            remove = true
+          end
+        end
+
+        if (overwrite == false) and (remove == false) then
           table.insert(keys, v)
         end
       end
