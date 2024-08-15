@@ -48,6 +48,15 @@ local setup_rg_opts = function(opts, search_string)
   return opts
 end
 
+---@param opts lazyvim.util.pick.Opts?
+---@return function
+local find_files = function(opts)
+  opts = opts or {}
+  return function()
+    if in_worktree(opts) then
+      require("fzf-lua").git_files({ cwd = get_cwd(opts) })
+    else
+      require("lazyvim.util").pick("files", opts)()
     end
   end
 end
@@ -218,6 +227,8 @@ return {
         { "<leader>sW", grep_cword({ root = false }), desc = "Word (cwd)" },
         { "<leader>sw", grep_visual(), mode = "v", desc = "Selection (Root Dir)" },
         { "<leader>sW", grep_visual({ root = false }), mode = "v", desc = "Selection (cwd)" },
+        { "<leader>ff", find_files(), desc = "Find Files (Root Dir)" },
+        { "<leader>fF", find_files({ root = false }), desc = "Find Files (cwd)" },
       }
 
       local keys = {}
@@ -242,13 +253,22 @@ return {
     "goolord/alpha-nvim",
     opts = function(_, _)
       local dashboard = require("alpha.themes.dashboard")
-      for idx, button in ipairs(dashboard.section.buttons.val) do
-        if string.find(button.val, "Find text") then
-          local button = dashboard.button(button.opts.shortcut, button.val, live_grep())
-          button.opts.hl = "AlphaButtons"
-          button.opts.hl_shortcut = "AlphaShortcut"
 
-          dashboard.section.buttons.val[idx] = button
+      ---@param shortcut string
+      ---@param txt string
+      ---@param callback function
+      local generate_button = function(shortcut, txt, callback)
+        local button = dashboard.button(shortcut, txt, callback)
+        button.opts.hl = "AlphaButtons"
+        button.opts.hl_shortcut = "AlphaShortcut"
+        return button
+      end
+
+      for idx, button in ipairs(dashboard.section.buttons.val) do
+        if string.find(button.val, "Find file") then
+          dashboard.section.buttons.val[idx] = generate_button(button.opts.shortcut, button.val, find_files())
+        elseif string.find(button.val, "Find text") then
+          dashboard.section.buttons.val[idx] = generate_button(button.opts.shortcut, button.val, live_grep())
         end
       end
     end,
