@@ -33,10 +33,12 @@ end
 ---@param opts lazyvim.util.pick.Opts?
 ---@param search_string string?
 local setup_gitgrep_opts = function(opts, search_string)
+  local cwd = get_cwd(opts)
+  local cmd = "git -C " .. cwd .. " grep --line-number --column --color=always"
   return {
-    cmd = "git grep --line-number --column --color=always",
+    cmd = cmd,
     winopts = { title = get_title("Git Grep", search_string) },
-    cwd = get_cwd(opts),
+    cwd = cwd,
   }
 end
 
