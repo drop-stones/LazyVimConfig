@@ -256,7 +256,9 @@ return {
         end
       end
 
-      keys = vim.tbl_extend("force", keys, additional_keys)
+      for _, v in ipairs(additional_keys) do
+        table.insert(keys, v)
+      end
       return keys
     end,
   },
