@@ -41,17 +41,33 @@ local fzf_keymap = {
   },
 }
 
-function M.setup_normal_keymap()
-  for _, keybind in ipairs(normal_keymap) do
-    vim.keymap.set("n", keybind.key, function()
-      if keybind.insert then
-        return "i" .. keybind.action
-      else
-        return "i" .. keybind.action .. "<C-\\><C-N>" .. "l" -- "l" is to not move the cursor position
+local setup_keymap_in_normal_mode = function(keymap)
+  vim.api.nvim_create_autocmd("OptionSet", {
+    pattern = "filetype",
+    callback = function()
+      if vim.bo.filetype ~= "fzf" then
+        return
       end
-    end, { buffer = true, expr = true, remap = true })
-  end
+      for _, keybind in ipairs(keymap) do
+        if type(keybind.action) == "function" then
+          vim.keymap.set("n", keybind.key, keybind.action, { buffer = true })
+        else
+          vim.keymap.set("n", keybind.key, function()
+            if keybind.insert then
+              return "i" .. keybind.action
+            else
+              return "i" .. keybind.action .. "<C-\\><C-N>" .. "l" -- "l" is to not move the cursor position
+            end
+          end, { buffer = true, expr = true, remap = true })
+        end
+      end
+    end,
+  })
   vim.api.nvim_set_option_value("cursorline", false, { scope = "local" }) -- disable search window highlighting
+end
+
+function M.setup_normal_keymap()
+  setup_keymap_in_normal_mode(normal_keymap)
 end
 
 function M.setup_fzf_keymap(fzf_keys)
