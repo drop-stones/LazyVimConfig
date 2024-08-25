@@ -4,6 +4,7 @@ local NuiText = require("nui.text")
 local Menu = require("nui.menu")
 local event = require("nui.utils.autocmd").event
 local Path = require("plenary.path")
+local Table = require("util.table")
 
 ---@class Pathspecs
 ---@field include table<string, boolean>
@@ -60,6 +61,39 @@ end
 ---@param type PathspecType
 function FzfMenu.unset_pathspec(pathspec, type)
   pathspecs[type][pathspec] = nil
+end
+
+--- Get pathspec string
+---@param type FzfCmdType
+---@return string
+function FzfMenu.get_pathspec_string(type)
+  print("type " .. type)
+  print("include " .. tostring(Table.table_len(pathspecs.include)), vim.inspect(pathspecs.include))
+  print("exclude " .. tostring(Table.table_len(pathspecs.exclude)), vim.inspect(pathspecs.exclude))
+  if Table.table_len(pathspecs.include) == 0 and Table.table_len(pathspecs.exclude) == 0 then
+    return ""
+  end
+
+  local glob_args = ""
+  if type == "rg" then
+    for include in pairs(pathspecs.include) do
+      glob_args = glob_args .. ("%s %s "):format("--iglob", require("fzf-lua.libuv").shellescape(include))
+    end
+    for exclude in pairs(pathspecs.exclude) do
+      glob_args = glob_args .. ("%s %s "):format("--iglob", require("fzf-lua.libuv").shellescape("!" .. exclude))
+    end
+    return glob_args
+  elseif type == "git_grep" then
+    glob_args = glob_args .. "-- "
+    for include in pairs(pathspecs.include) do
+      glob_args = glob_args .. ("%s "):format(require("fzf-lua.libuv").shellescape(include))
+    end
+    for exclude in pairs(pathspecs.exclude) do
+      glob_args = glob_args .. ("%s "):format(require("fzf-lua.libuv").shellescape(":!" .. exclude))
+    end
+    return glob_args
+  end
+  return ""
 end
 
 --- Fzf to select pathspec for files/grep
