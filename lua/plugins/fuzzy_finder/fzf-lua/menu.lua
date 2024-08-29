@@ -18,6 +18,17 @@ local pathspecs = {
   exclude = {},
 }
 
+---@type table
+local last_opts = {}
+
+---@type string
+local last_cmd = ""
+
+---@return string
+local get_last_cwd = function()
+  return last_opts.cwd
+end
+
 --- Get all file extensions under cwd
 ---@param opts table
 ---@return table<string, boolean>
@@ -67,9 +78,6 @@ end
 ---@param type FzfCmdType
 ---@return string
 function FzfMenu.get_pathspec_string(type)
-  print("type " .. type)
-  print("include " .. tostring(Table.table_len(pathspecs.include)), vim.inspect(pathspecs.include))
-  print("exclude " .. tostring(Table.table_len(pathspecs.exclude)), vim.inspect(pathspecs.exclude))
   if Table.table_len(pathspecs.include) == 0 and Table.table_len(pathspecs.exclude) == 0 then
     return ""
   end
@@ -96,14 +104,17 @@ function FzfMenu.get_pathspec_string(type)
   return ""
 end
 
+---@type function
+local fzf_menu
+
 --- Fzf to select pathspec for files/grep
----@param opts table?
 ---@param type PathspecType
-function FzfMenu.fzf_pathspec(opts, type)
-  opts = opts or {}
+---@param cwd string?
+---@param query string?
+local fzf_pathspec = function(type, cwd, query)
   local title = (type == "include") and "Include Patterns" or "Exclude Patterns"
-  opts = vim.tbl_deep_extend("force", opts, {
-    cwd = require("plugins.fuzzy_finder.fzf-lua.cmds").get_cwd(opts),
+  local opts = {
+    cwd = cwd,
     winopts = {
       height = 0.6,
       width = 0.6,
@@ -112,22 +123,20 @@ function FzfMenu.fzf_pathspec(opts, type)
       title = " " .. title .. " ",
       title_pos = "center",
     },
+    query = query,
+    no_resume = true,
     actions = {
       ["default"] = function(selected, opts)
         for _, sel in ipairs(selected) do
           FzfMenu.set_pathspec(sel, type)
         end
 
-        -- HACK: fzf-lua terminal buffer remains at first time
-        if vim.bo.filetype == "fzf" then
-          vim.api.nvim_buf_delete(vim.api.nvim_get_current_buf(), { force = true })
-        end
         vim.schedule(function()
-          require("plugins.fuzzy_finder.fzf-lua.menu").fzf_menu(pathspecs)
+          fzf_menu()
         end)
       end,
     },
-  })
+  }
 
   local extensions = get_all_extensions(opts)
   local directories = get_directories(opts)
@@ -149,8 +158,7 @@ function FzfMenu.fzf_pathspec(opts, type)
 end
 
 --- Open menu to set pathspecs for files/grep
----@param opts lazyvim.util.pick.Opts?
-function FzfMenu.fzf_menu(opts)
+fzf_menu = function()
   ---@return table<string, string>, string
   local get_winhighlight = function()
     local hls = {
@@ -202,10 +210,7 @@ function FzfMenu.fzf_menu(opts)
       local icon, hl = get_icon(include)
       table.insert(
         lines,
-        Menu.item(
-          NuiText(include, { virt_text = { { " " .. icon .. "  ", hl } }, virt_text_pos = "inline" }),
-          { type = "include" }
-        )
+        Menu.item(NuiText(include, { virt_text = { { " " .. icon .. "  ", hl } }, virt_text_pos = "inline" }), { type = "include" })
       )
     end
     table.insert(
@@ -225,10 +230,7 @@ function FzfMenu.fzf_menu(opts)
       local icon, hl = get_icon(exclude)
       table.insert(
         lines,
-        Menu.item(
-          NuiText(exclude, { virt_text = { { " " .. icon .. "  ", hl } }, virt_text_pos = "inline" }),
-          { type = "exclude" }
-        )
+        Menu.item(NuiText(exclude, { virt_text = { { " " .. icon .. "  ", hl } }, virt_text_pos = "inline" }), { type = "exclude" })
       )
     end
     table.insert(
@@ -295,19 +297,26 @@ function FzfMenu.fzf_menu(opts)
         end
       end
 
-      -- TODO:
-      --  [ ] save search kind and query
-      --  [ ] add glob pattern to command
-      --  [ ] restart the commands here
-      print("TODO: resume fzf-lua finder by hand")
+      local Opts = require("plugins.fuzzy_finder.fzf-lua.opts")
+      local opts
+      if last_opts.raw_cmd and string.match(last_opts.raw_cmd, "^git%s%-C%s.*%sgrep") ~= nil then
+        opts = vim.tbl_deep_extend("force", last_opts, { raw_cmd = Opts.get_gitgrep_cmd(get_last_cwd(), last_opts.search) })
+      elseif last_opts.rg_opts and not last_opts.raw_cmd then
+        opts = vim.tbl_deep_extend("force", last_opts, { rg_opts = Opts.get_rg_opts() })
+      else
+        opts = vim.deepcopy(last_opts)
+      end
+      vim.schedule(function()
+        require("fzf-lua")[last_cmd](opts)
+      end)
     end,
     on_submit = function(item)
       if item.blank == true then
-        FzfMenu.fzf_pathspec(opts, item.type)
+        fzf_pathspec(item.type, get_last_cwd())
       else
         FzfMenu.unset_pathspec(item.text:content(), item.type)
         vim.schedule(function()
-          FzfMenu.fzf_pathspec(vim.tbl_extend("force", opts, { query = item.text:content() }), item.type)
+          fzf_pathspec(item.type, get_last_cwd(), item.text:content())
         end)
       end
     end,
@@ -324,7 +333,7 @@ function FzfMenu.fzf_menu(opts)
 
     -- reopen
     menu:unmount()
-    FzfMenu.fzf_menu(opts)
+    fzf_menu()
   end)
 
   menu:on({ event.BufLeave }, function()
@@ -332,6 +341,15 @@ function FzfMenu.fzf_menu(opts)
   end, { once = true })
 
   menu:mount()
+end
+
+---@param opts FzfOpts
+FzfMenu.fzf_menu = function(opts)
+  local __call_opts = require("fzf-lua.config").__resume_data.opts.__call_opts
+  local last_query = require("fzf-lua").get_last_query()
+  last_cmd = require("fzf-lua.config").__resume_data.opts.__INFO.cmd
+  last_opts = vim.tbl_deep_extend("force", __call_opts, { query = last_query })
+  fzf_menu()
 end
 
 return FzfMenu
