@@ -127,8 +127,12 @@ local fzf_pathspec = function(type, cwd, query)
     no_resume = true,
     actions = {
       ["default"] = function(selected, opts)
-        for _, sel in ipairs(selected) do
-          FzfMenu.set_pathspec(sel, type)
+        if #selected == 0 then
+          FzfMenu.set_pathspec(require("fzf-lua").get_last_query(), type)
+        else
+          for _, sel in ipairs(selected) do
+            FzfMenu.set_pathspec(sel, type)
+          end
         end
 
         vim.schedule(function()
