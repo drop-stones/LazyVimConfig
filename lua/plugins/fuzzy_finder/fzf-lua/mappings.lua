@@ -17,6 +17,8 @@ local normal_keymap = {
   -- preview
   { key = "J", action = "<C-f>" },
   { key = "K", action = "<C-b>" },
+  -- menu
+  { key = "m", action = "<A-m>", insert = true },
   -- quit
   { key = "q", action = "<Esc>" },
   -- select
@@ -41,7 +43,7 @@ local fzf_keymap = {
   },
 }
 
-local setup_keymap_in_normal_mode = function(keymap)
+local setup_keymap = function(mode, keymap)
   vim.api.nvim_create_autocmd("OptionSet", {
     pattern = "filetype",
     callback = function()
@@ -50,9 +52,9 @@ local setup_keymap_in_normal_mode = function(keymap)
       end
       for _, keybind in ipairs(keymap) do
         if type(keybind.action) == "function" then
-          vim.keymap.set("n", keybind.key, keybind.action, { buffer = true })
+          vim.keymap.set(mode, keybind.key, keybind.action, { buffer = true })
         else
-          vim.keymap.set("n", keybind.key, function()
+          vim.keymap.set(mode, keybind.key, function()
             if keybind.insert then
               return "i" .. keybind.action
             else
@@ -67,7 +69,7 @@ local setup_keymap_in_normal_mode = function(keymap)
 end
 
 function M.setup_normal_keymap()
-  setup_keymap_in_normal_mode(normal_keymap)
+  setup_keymap("n", normal_keymap)
 end
 
 function M.setup_fzf_keymap(fzf_keys)

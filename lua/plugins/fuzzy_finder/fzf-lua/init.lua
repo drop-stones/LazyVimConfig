@@ -8,7 +8,9 @@ return {
       -- winopts
       local mappings = require("plugins.fuzzy_finder.fzf-lua.mappings")
       opts.winopts = {
-        on_create = mappings.setup_normal_keymap,
+        on_create = function()
+          mappings.setup_normal_keymap()
+        end,
       }
 
       -- files
@@ -19,6 +21,7 @@ return {
       -- git
       opts.git = {
         files = {
+          cmd = "git ls-files --exclude-standard --cached --others",
           headers = false, -- hide cwd/action headers
         },
         status = {
@@ -45,6 +48,13 @@ return {
       opts.grep = {
         headers = false, -- hide headers
         live_ast_prefix = false, -- remove '*' from prompt
+        actions = {
+          ["alt-m"] = function(_, opts)
+            vim.schedule(function()
+              require("plugins.fuzzy_finder.fzf-lua.menu").fzf_menu(opts)
+            end)
+          end,
+        },
       }
 
       -- args
