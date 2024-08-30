@@ -44,11 +44,19 @@ end
 
 --- Calculate all directory and file extension combinations
 ---@param cwd string
+---@param dir_cb fun(string)?
+---@param ext_cb fun(string, string)?
+---@param subext_cb fun(string, string)?
 ---@return DirExtensions
-local calc_dir_extensions = function(cwd)
+local calc_dir_extensions = function(cwd, dir_cb, ext_cb, subext_cb)
   ---@param path string
+  ---@param dir_cb fun(string)?
   ---@return DirExtensions
-  local function initialize_dir_extensions(path)
+  local function initialize_dir_extensions(path, dir_cb)
+    if dir_cb then
+      dir_cb(path)
+    end
+
     return {
       path = path,
       extensions = {},
@@ -59,20 +67,40 @@ local calc_dir_extensions = function(cwd)
     }
   end
 
+  ---@param dir_extensions DirExtensions
+  ---@param extension string
+  ---@param ext_cb fun(string, string)?
+  local function add_extension(dir_extensions, extension, ext_cb)
+    if dir_extensions.extensions[extension] == nil then
+      if ext_cb then
+        ext_cb(dir_extensions.path, extension)
+      end
+
+      dir_extensions.extensions[extension] = true
+    end
+  end
+
+  ---@param dir_extensions DirExtensions
+  ---@param extension string
+  ---@param subext_cb fun(string, string)?
+  local function add_subdir_extension(dir_extensions, extension, subext_cb)
+    if dir_extensions.subdirs.extensions[extension] == nil then
+      if subext_cb then
+        subext_cb(dir_extensions.path, extension)
+      end
+
+      dir_extensions.subdirs.extensions[extension] = true
+    end
+  end
+
   -- NOTE: `fd` is faster than `git ls-files` in my envoronment
   local files = require("util.command").get_os_command_output(
     { "fd", "--color=never", "--type", "f", "--hidden", "--follow", "--exclude", ".git" },
     cwd
   )
 
-  ---@param extensions Set
-  ---@param extension string
-  local function add_extension(extensions, extension)
-    extensions[extension] = true
-  end
-
   local sep = require("util.path").sep()
-  local dir_extensions = initialize_dir_extensions("")
+  local dir_extensions = initialize_dir_extensions("", dir_cb)
 
   -- Save all file extensions under the directory
   for _, file in ipairs(files) do
@@ -84,10 +112,10 @@ local calc_dir_extensions = function(cwd)
       if i == #parent_dirs then
         local extension = file:match("^.+(%..+)$")
         if extension then
-          add_extension(dir_iter.extensions, extension)
+          add_extension(dir_iter, extension, ext_cb)
         end
       else
-        dir_iter.subdirs.dirs[dirname] = dir_iter.subdirs.dirs[dirname] or initialize_dir_extensions(path)
+        dir_iter.subdirs.dirs[dirname] = dir_iter.subdirs.dirs[dirname] or initialize_dir_extensions(path, dir_cb)
         dir_iter = dir_iter.subdirs.dirs[dirname]
       end
     end
@@ -107,10 +135,10 @@ local calc_dir_extensions = function(cwd)
     -- Calc extensions set
     for _, subdir in pairs(subdirs) do
       for extension in pairs(subdir.extensions) do
-        add_extension(extensions, extension)
+        add_subdir_extension(dir_extensions, extension, subext_cb)
       end
       for extension in pairs(subdir.subdirs.extensions) do
-        add_extension(extensions, extension)
+        add_subdir_extension(dir_extensions, extension, subext_cb)
       end
     end
   end
@@ -205,33 +233,28 @@ local fzf_pathspec = function(type, cwd, query)
   require("fzf-lua").fzf_exec(function(fzf_cb)
     coroutine.wrap(function()
       local co = coroutine.running()
-      local dir_extensions = calc_dir_extensions(opts.cwd)
 
       ---@param entry string
-      local function fzf_callback_with_coroutine(entry)
+      local fzf_callback_with_coroutine = function(entry)
         fzf_cb(entry, function()
           coroutine.resume(co)
         end)
         coroutine.yield()
       end
 
-      ---@param dir_extensions DirExtensions
-      local function create_pathspec_from_dir_extensions(path, dir_extensions)
+      local dir_cb = function(path)
         fzf_callback_with_coroutine(path .. "**")
-
-        for extension in pairs(dir_extensions.extensions) do
-          fzf_callback_with_coroutine(path .. "*" .. extension)
-        end
-        for extension in pairs(dir_extensions.subdirs.extensions) do
-          fzf_callback_with_coroutine(path .. "**/*" .. extension)
-        end
-
-        for _, subdir in pairs(dir_extensions.subdirs.dirs) do
-          create_pathspec_from_dir_extensions(subdir.path, subdir)
-        end
       end
 
-      create_pathspec_from_dir_extensions("", dir_extensions)
+      local ext_cb = function(path, extension)
+        fzf_callback_with_coroutine(path .. "*" .. extension)
+      end
+
+      local subext_cb = function(path, extension)
+        fzf_callback_with_coroutine(path .. "**/*" .. extension)
+      end
+
+      calc_dir_extensions(opts.cwd, dir_cb, ext_cb, subext_cb)
 
       fzf_cb()
     end)()
