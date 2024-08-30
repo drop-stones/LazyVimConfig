@@ -1,5 +1,7 @@
 local Opts = {}
 
+local Menu = require("plugins.fuzzy_finder.fzf-lua.menu")
+
 ---@class FzfOpts
 ---@field cmd string?
 ---@field raw_cmd string?
@@ -65,6 +67,7 @@ function Opts.setup_live_gitgrep_opts(opts)
     raw_cmd = Opts.get_gitgrep_cmd(cwd),
     winopts = { title = get_title("Git Grep") },
     cwd = cwd,
+    header = Menu.get_pathspec_header(),
   }
 end
 
@@ -80,6 +83,7 @@ function Opts.setup_search_gitgrep_opts(opts, search)
     winopts = { title = get_title("Git Grep", search) },
     cwd = cwd,
     search = search, -- HACK: to resume this search function
+    header = Menu.get_pathspec_header(),
   }
 end
 
@@ -93,6 +97,7 @@ function Opts.setup_live_rg_opts(opts)
     rg_opts = require("fzf-lua").defaults.grep.rg_opts:gsub("-e", "") .. " " .. pathspec .. " -e",
     winopts = { title = get_title("Grep") },
     cwd = cwd,
+    header = Menu.get_pathspec_header(),
   }
 end
 
@@ -108,6 +113,7 @@ function Opts.setup_search_rg_opts(opts, search)
     winopts = { title = get_title("Grep", search) },
     cwd = cwd,
     search = query,
+    header = Menu.get_pathspec_header(),
   }
 end
 

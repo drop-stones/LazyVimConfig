@@ -189,6 +189,33 @@ function FzfMenu.get_pathspec_string(type)
   return ""
 end
 
+---@return nil|string
+function FzfMenu.get_pathspec_header()
+  local ret = {}
+  if Table.table_len(pathspecs.include) > 0 then
+    local includes = {}
+    local include_icon = require("fzf-lua.utils").ansi_from_hl("MiniIconsGreen", " ")
+    for include in pairs(pathspecs.include) do
+      includes[#includes + 1] = include
+    end
+    ret[#ret + 1] = include_icon .. " " .. table.concat(includes, ", ")
+  end
+  if Table.table_len(pathspecs.exclude) > 0 then
+    local excludes = {}
+    local exclude_icon = require("fzf-lua.utils").ansi_from_hl("MiniIconsRed", " ")
+    for exclude in pairs(pathspecs.exclude) do
+      excludes[#excludes + 1] = exclude
+    end
+    ret[#ret + 1] = exclude_icon .. " " .. table.concat(excludes, ", ")
+  end
+
+  if #ret > 0 then
+    return table.concat(ret, "  ")
+  else
+    return nil
+  end
+end
+
 ---@type function
 local fzf_menu
 
@@ -422,9 +449,13 @@ fzf_menu = function()
       local Opts = require("plugins.fuzzy_finder.fzf-lua.opts")
       local opts
       if last_opts.raw_cmd and string.match(last_opts.raw_cmd, "^git%s%-C%s.*%sgrep") ~= nil then
-        opts = vim.tbl_deep_extend("force", last_opts, { raw_cmd = Opts.get_gitgrep_cmd(get_last_cwd(), last_opts.search), query = last_opts.query })
+        opts = vim.tbl_deep_extend(
+          "force",
+          last_opts,
+          { raw_cmd = Opts.get_gitgrep_cmd(get_last_cwd(), last_opts.search), header = FzfMenu.get_pathspec_header() }
+        )
       elseif last_opts.rg_opts and not last_opts.raw_cmd then
-        opts = vim.tbl_deep_extend("force", last_opts, { rg_opts = Opts.get_rg_opts(), query = last_opts.query })
+        opts = vim.tbl_deep_extend("force", last_opts, { rg_opts = Opts.get_rg_opts(), header = FzfMenu.get_pathspec_header() })
       else
         opts = vim.deepcopy(last_opts)
       end
