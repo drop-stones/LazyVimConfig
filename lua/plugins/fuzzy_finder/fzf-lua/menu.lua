@@ -21,6 +21,7 @@ local Table = require("util.table")
 ---@field dirs DirExtensionSet
 
 ---@class DirExtensions
+---@field path string
 ---@field extensions Set
 ---@field subdirs SubDirExtensions
 
@@ -45,9 +46,11 @@ end
 ---@param cwd string
 ---@return DirExtensions
 local calc_dir_extensions = function(cwd)
+  ---@param path string
   ---@return DirExtensions
-  local function initialize_dir_extensions()
+  local function initialize_dir_extensions(path)
     return {
+      path = path,
       extensions = {},
       subdirs = {
         extensions = {},
@@ -56,56 +59,65 @@ local calc_dir_extensions = function(cwd)
     }
   end
 
+  -- NOTE: `fd` is faster than `git ls-files` in my envoronment
   local files = require("util.command").get_os_command_output(
     { "fd", "--color=never", "--type", "f", "--hidden", "--follow", "--exclude", ".git" },
     cwd
   )
 
-  local sep = require("util.path").sep()
-  local extensions = initialize_dir_extensions()
+  ---@param extensions Set
+  ---@param extension string
+  local function add_extension(extensions, extension)
+    extensions[extension] = true
+  end
 
-  -- Create table to save all file extensions of subdirectories
+  local sep = require("util.path").sep()
+  local dir_extensions = initialize_dir_extensions("")
+
+  -- Save all file extensions under the directory
   for _, file in ipairs(files) do
     local parent_dirs = require("util.string").split(file, sep)
-    local dir_iter = extensions
-    for i, dir in ipairs(parent_dirs) do
+    local path = ""
+    local dir_iter = dir_extensions
+    for i, dirname in ipairs(parent_dirs) do
+      path = path .. dirname .. "/"
       if i == #parent_dirs then
         local extension = file:match("^.+(%..+)$")
         if extension then
-          dir_iter.extensions[extension] = true
+          add_extension(dir_iter.extensions, extension)
         end
       else
-        dir_iter.subdirs.dirs[dir] = dir_iter.subdirs.dirs[dir] or initialize_dir_extensions()
-        dir_iter = dir_iter.subdirs.dirs[dir]
+        dir_iter.subdirs.dirs[dirname] = dir_iter.subdirs.dirs[dirname] or initialize_dir_extensions(path)
+        dir_iter = dir_iter.subdirs.dirs[dirname]
       end
     end
   end
 
-  -- Calculate
+  -- Calculate all file extensions under the subdirectories
   ---@param dir_extensions DirExtensions
   local function calc_extensions_of_subdirs(dir_extensions)
     local subdirs = dir_extensions.subdirs.dirs
     local extensions = dir_extensions.subdirs.extensions
 
     -- depth-first ordering
-    for dirname, subdir in pairs(subdirs) do
+    for _, subdir in pairs(subdirs) do
       calc_extensions_of_subdirs(subdir)
     end
 
     -- Calc extensions set
     for _, subdir in pairs(subdirs) do
       for extension in pairs(subdir.extensions) do
-        extensions[extension] = true
+        add_extension(extensions, extension)
       end
       for extension in pairs(subdir.subdirs.extensions) do
-        extensions[extension] = true
+        add_extension(extensions, extension)
       end
     end
   end
 
-  calc_extensions_of_subdirs(extensions)
+  calc_extensions_of_subdirs(dir_extensions)
 
-  return extensions
+  return dir_extensions
 end
 
 --- Set pathspec for files/grep
@@ -214,9 +226,8 @@ local fzf_pathspec = function(type, cwd, query)
           fzf_callback_with_coroutine(path .. "**/*" .. extension)
         end
 
-        for dirname, subdir in pairs(dir_extensions.subdirs.dirs) do
-          local subdir_path = path .. dirname .. "/"
-          create_pathspec_from_dir_extensions(subdir_path, subdir)
+        for _, subdir in pairs(dir_extensions.subdirs.dirs) do
+          create_pathspec_from_dir_extensions(subdir.path, subdir)
         end
       end
 
