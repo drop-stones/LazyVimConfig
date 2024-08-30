@@ -125,7 +125,6 @@ local calc_dir_extensions = function(cwd, dir_cb, ext_cb, subext_cb)
   ---@param dir_extensions DirExtensions
   local function calc_extensions_of_subdirs(dir_extensions)
     local subdirs = dir_extensions.subdirs.dirs
-    local extensions = dir_extensions.subdirs.extensions
 
     -- depth-first ordering
     for _, subdir in pairs(subdirs) do
@@ -219,7 +218,8 @@ local fzf_pathspec = function(type, cwd, query)
           FzfMenu.set_pathspec(require("fzf-lua").get_last_query(), type)
         else
           for _, sel in ipairs(selected) do
-            FzfMenu.set_pathspec(sel, type)
+            local pattern = require("fzf-lua.path").entry_to_file(sel).stripped
+            FzfMenu.set_pathspec(pattern, type)
           end
         end
 
@@ -234,24 +234,44 @@ local fzf_pathspec = function(type, cwd, query)
     coroutine.wrap(function()
       local co = coroutine.running()
 
-      ---@param entry string
-      local fzf_callback_with_coroutine = function(entry)
-        fzf_cb(entry, function()
-          coroutine.resume(co)
+      ---@param make_entry fun(): string
+      local fzf_add_entry = function(make_entry)
+        vim.schedule(function()
+          local entry = make_entry()
+          fzf_cb(entry, function()
+            coroutine.resume(co)
+          end)
         end)
         coroutine.yield()
       end
 
+      local make_entry = function(icon, hl, path)
+        local ret = {}
+        ret[#ret + 1] = require("fzf-lua.utils").ansi_from_hl(hl, icon)
+        ret[#ret + 1] = require("fzf-lua.utils").nbsp
+        ret[#ret + 1] = path
+        return table.concat(ret)
+      end
+
       local dir_cb = function(path)
-        fzf_callback_with_coroutine(path .. "**")
+        fzf_add_entry(function()
+          local icon, hl = require("mini.icons").get("directory", path)
+          return make_entry(icon, hl, path .. "**")
+        end)
       end
 
       local ext_cb = function(path, extension)
-        fzf_callback_with_coroutine(path .. "*" .. extension)
+        fzf_add_entry(function()
+          local icon, hl = require("mini.icons").get("file", "x" .. extension)
+          return make_entry(icon, hl, path .. "*" .. extension)
+        end)
       end
 
       local subext_cb = function(path, extension)
-        fzf_callback_with_coroutine(path .. "**/*" .. extension)
+        fzf_add_entry(function()
+          local icon, hl = require("mini.icons").get("file", "x" .. extension)
+          return make_entry(icon, hl, path .. "**/*" .. extension)
+        end)
       end
 
       calc_dir_extensions(opts.cwd, dir_cb, ext_cb, subext_cb)
