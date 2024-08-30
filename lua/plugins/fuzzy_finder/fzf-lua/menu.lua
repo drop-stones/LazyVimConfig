@@ -94,10 +94,8 @@ local calc_dir_extensions = function(cwd, dir_cb, ext_cb, subext_cb)
   end
 
   -- NOTE: `fd` is faster than `git ls-files` in my envoronment
-  local files = require("util.command").get_os_command_output(
-    { "fd", "--color=never", "--type", "f", "--hidden", "--follow", "--exclude", ".git" },
-    cwd
-  )
+  local files =
+    require("util.command").get_os_command_output({ "fd", "--color=never", "--type", "f", "--hidden", "--follow", "--exclude", ".git" }, cwd)
 
   local sep = require("util.path").sep()
   local dir_extensions = initialize_dir_extensions("", dir_cb)
@@ -424,9 +422,9 @@ fzf_menu = function()
       local Opts = require("plugins.fuzzy_finder.fzf-lua.opts")
       local opts
       if last_opts.raw_cmd and string.match(last_opts.raw_cmd, "^git%s%-C%s.*%sgrep") ~= nil then
-        opts = vim.tbl_deep_extend("force", last_opts, { raw_cmd = Opts.get_gitgrep_cmd(get_last_cwd(), last_opts.search) })
+        opts = vim.tbl_deep_extend("force", last_opts, { raw_cmd = Opts.get_gitgrep_cmd(get_last_cwd(), last_opts.search), query = last_opts.query })
       elseif last_opts.rg_opts and not last_opts.raw_cmd then
-        opts = vim.tbl_deep_extend("force", last_opts, { rg_opts = Opts.get_rg_opts() })
+        opts = vim.tbl_deep_extend("force", last_opts, { rg_opts = Opts.get_rg_opts(), query = last_opts.query })
       else
         opts = vim.deepcopy(last_opts)
       end
