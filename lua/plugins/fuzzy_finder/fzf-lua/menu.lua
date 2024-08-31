@@ -393,6 +393,18 @@ fzf_menu = function()
     return lines
   end
 
+  local reopen = function(menu)
+    -- Save current cursor position
+    local pos = vim.api.nvim_win_get_cursor(menu.winid)
+
+    -- reopen
+    menu:unmount()
+    local new_menu = fzf_menu()
+
+    -- Restore cursor position
+    vim.api.nvim_win_set_cursor(new_menu.winid, pos)
+  end
+
   local hls, winhighlight = get_winhighlight()
   local lines = get_lines(hls, pathspecs)
 
@@ -483,9 +495,7 @@ fzf_menu = function()
 
     FzfMenu.unset_pathspec(item.text:content(), item.type)
 
-    -- reopen
-    menu:unmount()
-    fzf_menu()
+    reopen(menu)
   end)
 
   menu:on({ event.BufLeave }, function()
