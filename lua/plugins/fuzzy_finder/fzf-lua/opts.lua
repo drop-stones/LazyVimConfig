@@ -38,7 +38,9 @@ end
 ---@return string
 function Opts.get_gitgrep_cmd(cwd, query)
   local pathspec = require("plugins.fuzzy_finder.fzf-lua.menu").get_pathspec_string("git_grep")
-  query = query or "<query>"
+  if (query == nil) or (query == "") then
+    query = "<query>"
+  end
   cwd = (cwd and "-C " .. cwd) or ""
   return "git " .. cwd .. " grep --line-number --column --color=always --untracked -I " .. query .. " " .. pathspec -- HACK: Use 'raw_cmd' to prevent <query> appending
 end
