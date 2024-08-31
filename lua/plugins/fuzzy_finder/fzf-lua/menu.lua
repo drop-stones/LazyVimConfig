@@ -451,16 +451,13 @@ fzf_menu = function()
       local Opts = require("plugins.fuzzy_finder.fzf-lua.opts")
       local opts
       if last_opts.raw_cmd and string.match(last_opts.raw_cmd, "^git%s%-C%s.*%sgrep") ~= nil then
-        opts = vim.tbl_deep_extend(
-          "force",
-          last_opts,
-          { raw_cmd = Opts.get_gitgrep_cmd(get_last_cwd(), last_opts.search), header = FzfMenu.get_pathspec_header() }
-        )
+        opts = vim.tbl_deep_extend("force", last_opts, { raw_cmd = Opts.get_gitgrep_cmd(get_last_cwd(), last_opts.search) })
       elseif last_opts.rg_opts and not last_opts.raw_cmd then
-        opts = vim.tbl_deep_extend("force", last_opts, { rg_opts = Opts.get_rg_opts(), header = FzfMenu.get_pathspec_header() })
+        opts = vim.tbl_deep_extend("force", last_opts, { rg_opts = Opts.get_rg_opts() })
       else
         opts = vim.deepcopy(last_opts)
       end
+      opts.header = FzfMenu.get_pathspec_header() -- NOTE: header may be nil if include/exclude is empty and nil cannot be written by `vim.tbl_deep_extend`
       vim.schedule(function()
         require("fzf-lua")[last_cmd](opts)
       end)
