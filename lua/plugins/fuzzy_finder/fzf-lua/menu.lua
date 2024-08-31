@@ -350,6 +350,7 @@ fzf_menu = function()
     end
     local blank_icon = ""
     local blank_hl = "MiniIconsRed"
+    local icon_format = "  %s  "
 
     local lines = {}
 
@@ -359,13 +360,13 @@ fzf_menu = function()
       local icon, hl = get_icon(include)
       table.insert(
         lines,
-        Menu.item(NuiText(include, { virt_text = { { " " .. icon .. "  ", hl } }, virt_text_pos = "inline" }), { type = "include" })
+        Menu.item(NuiText(include, { virt_text = { { string.format(icon_format, icon), hl } }, virt_text_pos = "inline" }), { type = "include" })
       )
     end
     table.insert(
       lines,
       Menu.item(
-        NuiText(" ", { virt_text = { { " " .. blank_icon .. "  ", blank_hl } }, virt_text_pos = "inline" }),
+        NuiText(" ", { virt_text = { { string.format(icon_format, blank_icon), blank_hl } }, virt_text_pos = "inline" }),
         { type = "include", blank = true }
       )
     )
@@ -379,13 +380,13 @@ fzf_menu = function()
       local icon, hl = get_icon(exclude)
       table.insert(
         lines,
-        Menu.item(NuiText(exclude, { virt_text = { { " " .. icon .. "  ", hl } }, virt_text_pos = "inline" }), { type = "exclude" })
+        Menu.item(NuiText(exclude, { virt_text = { { string.format(icon_format, icon), hl } }, virt_text_pos = "inline" }), { type = "exclude" })
       )
     end
     table.insert(
       lines,
       Menu.item(
-        NuiText(" ", { virt_text = { { " " .. blank_icon .. "  ", blank_hl } }, virt_text_pos = "inline" }),
+        NuiText(" ", { virt_text = { { string.format(icon_format, blank_icon), blank_hl } }, virt_text_pos = "inline" }),
         { type = "exclude", blank = true }
       )
     )
@@ -426,6 +427,7 @@ fzf_menu = function()
     },
     win_options = {
       winhighlight = winhighlight,
+      virtualedit = "all", -- Set cursor position to head of lines
     },
   }
 
@@ -494,6 +496,8 @@ fzf_menu = function()
   end, { once = true })
 
   menu:mount()
+
+  return menu
 end
 
 ---@param opts FzfOpts
