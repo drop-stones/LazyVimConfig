@@ -234,11 +234,15 @@ local fzf_pathspec = function(type, cwd, query)
       col = 0.5,
       title = " " .. title .. " ",
       title_pos = "center",
+      on_close = function()
+        -- HACK: Close anonymous listed buffer
+        require("util.buffer").close_anonymous_buffers()
+      end,
     },
     query = query,
     no_resume = true,
     actions = {
-      ["default"] = function(selected, opts)
+      ["default"] = function(selected, _)
         if #selected == 0 then
           FzfMenu.set_pathspec(require("fzf-lua").get_last_query(), type)
         else
@@ -246,6 +250,16 @@ local fzf_pathspec = function(type, cwd, query)
             local pattern = require("fzf-lua.path").entry_to_file(sel).stripped
             FzfMenu.set_pathspec(pattern, type)
           end
+        end
+
+        vim.schedule(function()
+          fzf_menu()
+        end)
+      end,
+      ["esc"] = function(_, _)
+        -- Restore query if exists
+        if query then
+          FzfMenu.set_pathspec(query, type)
         end
 
         vim.schedule(function()
@@ -453,12 +467,7 @@ fzf_menu = function()
     },
     on_close = function()
       -- HACK: Close anonymous listed buffer
-      local buflist = vim.api.nvim_list_bufs()
-      for _, bufnr in ipairs(buflist) do
-        if (vim.api.nvim_buf_get_name(bufnr) == "") and (vim.fn.buflisted(bufnr) == 1) then
-          vim.api.nvim_buf_delete(bufnr, { force = true })
-        end
-      end
+      require("util.buffer").close_anonymous_buffers()
 
       local Opts = require("plugins.fuzzy_finder.fzf-lua.opts")
       local opts
