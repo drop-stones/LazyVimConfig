@@ -22,7 +22,7 @@ local normal_keymap = {
   -- quit
   { key = "q", action = "<Esc>" },
   -- select
-  { key = "<Enter>", action = "<Enter>" },
+  { key = "<Enter>", action = "<Enter>", insert = true },
 }
 
 -- Normal mode

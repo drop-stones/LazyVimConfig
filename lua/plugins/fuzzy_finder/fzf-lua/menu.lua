@@ -12,7 +12,7 @@ local Table = require("util.table")
 ---@field include Set
 ---@field exclude Set
 
----@alias PathspecType '"include"' | '"exclude"'
+---@alias PathspecType "include" | "exclude"
 
 ---@alias DirExtensionSet table<string, DirExtensions>
 
