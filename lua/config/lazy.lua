@@ -17,6 +17,7 @@ require("lazy").setup({
     { import = "plugins.comment" },
     { import = "plugins.completion" },
     { import = "plugins.dap" },
+    { import = "plugins.dotfiles" },
     { import = "plugins.editing_support" },
     { import = "plugins.git" },
     { import = "plugins.indent" },
