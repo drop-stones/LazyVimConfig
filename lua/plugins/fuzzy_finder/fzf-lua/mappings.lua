@@ -22,7 +22,14 @@ local normal_keymap = {
   -- quit
   { key = "q", action = "<Esc>" },
   -- select
-  { key = "<Enter>", action = "<Enter>", insert = true },
+  {
+    key = "<Enter>",
+    action = function()
+      -- NOTE: Block until key input to prevent entering to insert mode after file open
+      local key = vim.api.nvim_replace_termcodes("i<CR>", true, false, true)
+      vim.api.nvim_feedkeys(key, "n", false)
+    end,
+  },
 }
 
 -- Normal mode
