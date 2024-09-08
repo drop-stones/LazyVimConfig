@@ -29,11 +29,11 @@ end
 ---@return function
 function Cmds.grep_cword(opts)
   return function()
-    local search_string = vim.fn.expand("<cword>")
     if in_worktree(opts) then
+      local search_string = vim.fn.expand("<cword>")
       require("fzf-lua").grep(Opts.setup_search_gitgrep_opts(opts, search_string))
     else
-      require("fzf-lua").grep(Opts.setup_search_rg_opts(opts, search_string))
+      require("fzf-lua").grep_cword(Opts.setup_search_rg_opts(opts, search_string))
     end
   end
 end
@@ -42,11 +42,11 @@ end
 ---@return function
 function Cmds.grep_visual(opts)
   return function()
-    local search_string, _ = require("fzf-lua.utils").get_visual_selection()
     if in_worktree(opts) then
+      local search_string, _ = require("fzf-lua.utils").get_visual_selection()
       require("fzf-lua").grep(Opts.setup_search_gitgrep_opts(opts, search_string))
     else
-      require("fzf-lua").grep(Opts.setup_search_rg_opts(opts, search_string))
+      require("fzf-lua").grep_visual(Opts.setup_search_rg_opts(opts, search_string))
     end
   end
 end

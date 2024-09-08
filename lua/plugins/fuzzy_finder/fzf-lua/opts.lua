@@ -100,12 +100,10 @@ end
 ---@return FzfOpts
 function Opts.setup_search_rg_opts(opts, search)
   local cwd = get_cwd(opts)
-  local query = vim.fn.shellescape(search)
   return {
     rg_opts = Opts.get_rg_opts(),
     winopts = { title = get_title("Grep", search) },
     cwd = cwd,
-    search = query,
     header = Menu.get_pathspec_header(),
   }
 end
