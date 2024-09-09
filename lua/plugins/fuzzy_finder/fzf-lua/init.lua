@@ -116,7 +116,9 @@ return {
       end
 
       for idx, button in ipairs(dashboard.section.buttons.val) do
-        if string.find(button.val, "Find text") then
+        if string.find(button.val, "Find file") then
+          dashboard.section.buttons.val[idx] = generate_button(button.opts.shortcut, button.val, cmds.find_files())
+        elseif string.find(button.val, "Find text") then
           dashboard.section.buttons.val[idx] = generate_button(button.opts.shortcut, button.val, cmds.live_grep())
         end
       end

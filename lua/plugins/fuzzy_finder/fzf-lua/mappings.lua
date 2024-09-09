@@ -42,6 +42,8 @@ local fzf_keymap = {
     { "<leader>sW", cmds.grep_cword({ root = false }), desc = "Word (cwd)" },
     { "<leader>sw", cmds.grep_visual(), mode = "v", desc = "Selection (Root Dir)" },
     { "<leader>sW", cmds.grep_visual({ root = false }), mode = "v", desc = "Selection (cwd)" },
+    { "<leader>ff", cmds.find_files(), desc = "Find Files (Root Dir)" },
+    { "<leader>fF", cmds.find_files({ root = false }), desc = "Find Files (cwd)" },
   },
   remove_keys = {
     { "<leader>fg" },

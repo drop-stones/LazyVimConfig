@@ -51,6 +51,15 @@ function Opts.get_rg_opts()
   return require("fzf-lua").defaults.grep.rg_opts:gsub("-e", "") .. " " .. pathspec .. " -e"
 end
 
+---Setup options for files
+---@param opts lazyvim.util.pick.Opts?
+---@return FzfOpts
+function Opts.setup_files_opts(opts)
+  return {
+    cwd = get_cwd(opts),
+  }
+end
+
 --- Setup options for live git grep
 ---@param opts lazyvim.util.pick.Opts?
 ---@return FzfOpts

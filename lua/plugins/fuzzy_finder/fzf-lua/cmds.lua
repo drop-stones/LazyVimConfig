@@ -2,7 +2,7 @@ local Cmds = {}
 
 local Opts = require("plugins.fuzzy_finder.fzf-lua.opts")
 
----@alias FzfCmdType "files" | "rg" | "git_grep"
+---@alias FzfCmdType "files" | "rg" | "git_files" | "git_grep"
 
 --- Check whether the current working directory is in a git repository
 ---@param opts lazyvim.util.pick.Opts?
@@ -11,6 +11,18 @@ local in_worktree = function(opts)
   opts = opts or {}
   local cwd = vim.F.if_nil(opts.cwd, vim.uv.cwd())
   return require("util.command").get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" }, cwd)[1]
+end
+
+---@param opts lazyvim.util.pick.Opts?
+---@return function
+function Cmds.find_files(opts)
+  return function()
+    if in_worktree(opts) then
+      require("fzf-lua").git_files(Opts.setup_files_opts(opts))
+    else
+      require("fzf-lua").files(Opts.setup_files_opts(opts))
+    end
+  end
 end
 
 ---@param opts lazyvim.util.pick.Opts?
