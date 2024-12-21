@@ -18,27 +18,28 @@ return {
       "nvim-lua/plenary.nvim",
 
       -- Optional
+      "ibhagwan/fzf-lua",
       "hrsh7th/nvim-cmp",
-      "nvim-telescope/telescope.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
     cmd = {
-      "ObsidianNew",
       "ObsidianOpen",
+      "ObsidianNew",
       "ObsidianQuickSwitch",
       "ObsidianToday",
       "ObsidianYesterday",
       "ObsidianTomorrow",
+      "ObsidianDailies",
       "ObsidianSearch",
       "ObsidianWorkspace",
+      "ObsidianNewFromTemplate",
     },
     keys = {
       -- normal mode
       { "<leader>nn", "<Cmd>ObsidianNew<Cr>", desc = "Create a new note" },
       { "<leader>no", "<Cmd>ObsidianOpen<Cr>", desc = "Open a note in the Obsidian app" },
       { "<leader>nr", "<Cmd>ObsidianRename<Cr>", desc = "Rename the note of the current buffer" },
-      { "<leader>nq", "<Cmd>ObsidianQuickSwitch<Cr>", desc = "Quickly switch to anther note" },
-      { "<leader>nf", "<Cmd>ObsidianFollowLink<Cr>", desc = "Follow a note reference" },
+      { "<leader>nf", "<Cmd>ObsidianQuickSwitch<Cr>", desc = "Find note" },
       {
         "<leader>nv",
         "<Cmd>ObsidianFollowLink vsplit<Cr>",
@@ -57,7 +58,7 @@ return {
       { "<leader>nd", "<Cmd>ObsidianToday<Cr>", desc = "Open a new daily note" },
       { "<leader>ny", "<Cmd>ObsidianYesterday<Cr>", desc = "Open the daily note for yesterday" },
       { "<leader>nt", "<Cmd>ObsidianTomorrow<Cr>", desc = "Open the daily note for tomorrow" },
-      { "<leader>ns", "<Cmd>ObsidianSearch<Cr>", desc = "Search for notes" },
+      { "<leader>ng", "<Cmd>ObsidianSearch<Cr>", desc = "Search for notes" },
       { "<leader>nw", "<Cmd>ObsidianWorkspace<Cr>", desc = "Switch to another workspace" },
       { "<leader>np", "<Cmd>ObsidianPasteImg<Cr>", desc = "Paste an image from clipboard" },
 
@@ -90,16 +91,22 @@ return {
     opts = {
       workspaces = {
         {
-          name = "notes",
-          path = "~/vaults/notes",
+          name = "personal",
+          path = "~/.config/obsidian/vaults/personal",
         },
         {
-          name = "books",
-          path = "~/vaults/books",
+          name = "work",
+          path = "~/.config/obsidian/vaults/work",
         },
       },
 
-      notes_subdir = "ideas",
+      -- Optional, if you keep notes in a specific subdirectory of your vault.
+      notes_subdir = "notes",
+
+      -- Where to put new notes. Valid options are
+      --  * "current_dir" - put new notes in same directory as the current buffer.
+      --  * "notes_subdir" - put new notes in the default notes subdirectory.
+      new_notes_location = "notes_subdir",
 
       daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
@@ -112,6 +119,9 @@ return {
         template = nil,
       },
 
+      -- Optional, customize how note IDs are generated given an optional title.
+      ---@param title string|?
+      ---@return string
       note_id_func = function(title)
         if title ~= nil then
           -- If title is set, use title as file name
@@ -126,6 +136,13 @@ return {
         end
       end,
 
+      -- Either 'wiki' or 'markdown'.
+      preferred_link_style = "markdown",
+
+      -- Optional, boolean or a function that takes a filename and returns a boolean.
+      -- `true` indicates that you don't want obsidian.nvim to manage frontmatter.
+      ---@param filename string
+      ---@return boolean
       disable_frontmatter = function(filename)
         -- Disable yaml frontmatter for dailies
         if string.match(filename, "dailies/*") ~= nil then
@@ -134,10 +151,20 @@ return {
         return false
       end,
 
-      templates = {
-        subdir = "templates",
-        date_format = "%Y-%m-%d",
-        time_format = "%H:%M",
+      picker = {
+        -- Set your preferred picker
+        name = "fzf-lua",
+      },
+
+      -- Optional, configure additional syntax highlighting / extmarks.
+      -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
+      ui = {
+        -- Define how various check-boxes are displayed
+        checkboxes = {
+          -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
+          [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+          ["x"] = { char = "", hl_group = "ObsidianDone" },
+        },
       },
     },
   },
