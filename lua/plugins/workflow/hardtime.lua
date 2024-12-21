@@ -13,7 +13,9 @@ return {
     "m4xshen/hardtime.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     event = "LazyFile",
-    opts = {},
+    opts = {
+      max_count = 10,
+    },
     keys = {
       {
         "<leader>mhe",
