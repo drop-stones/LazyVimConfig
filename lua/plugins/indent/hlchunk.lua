@@ -2,6 +2,13 @@ local colors = require("tokyonight.colors").setup()
 local color = colors.blue
 
 return {
+  -- disable snacks indent when indent-blankline is enabled
+  {
+    "snacks.nvim",
+    opts = {
+      indent = { enabled = false },
+    },
+  },
   {
     "shellRaining/hlchunk.nvim",
     event = "LazyFile",
@@ -30,5 +37,4 @@ return {
       },
     },
   },
-  { "lukas-reineke/indent-blankline.nvim", enabled = false },
 }
