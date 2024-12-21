@@ -21,7 +21,6 @@ return {
       "hrsh7th/nvim-cmp",
       "nvim-telescope/telescope.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "epwalsh/pomo.nvim",
     },
     cmd = {
       "ObsidianNew",
