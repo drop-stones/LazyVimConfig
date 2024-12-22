@@ -4,5 +4,5 @@
 - [ ] snacks.dashboard vs alpha
 - [ ] snacks.terminal vs toggleterm
 - [ ] blink.cmp vs nvim-cmp
-- [ ] Do not insert whitespaces when `gsa` in mini-surround
+- [x] Do not insert whitespaces when `gsa` in mini-surround
 - [x] Setup obsidian.nvim correctly
