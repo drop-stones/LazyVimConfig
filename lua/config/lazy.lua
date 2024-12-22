@@ -35,6 +35,7 @@ require("lazy").setup({
     { import = "plugins.syntax" },
     { import = "plugins.terminal" },
     { import = "plugins.test" },
+    { import = "plugins.util" },
     { import = "plugins.workflow" },
     { import = "plugins.private" },
     { import = "plugins.post_process" },

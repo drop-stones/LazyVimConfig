@@ -1,6 +1,6 @@
 # TODO List
 
-- [ ] snacks.indent vs hlchunk
+- [x] snacks.indent vs hlchunk
 - [ ] snacks.dashboard vs alpha
 - [ ] snacks.terminal vs toggleterm
 - [ ] blink.cmp vs nvim-cmp
