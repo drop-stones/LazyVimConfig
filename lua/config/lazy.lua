@@ -19,7 +19,6 @@ require("lazy").setup({
     { import = "plugins.dotfiles" },
     { import = "plugins.editing_support" },
     { import = "plugins.git" },
-    { import = "plugins.indent" },
     { import = "plugins.keybinding" },
     { import = "plugins.lang" },
     { import = "plugins.window" }, -- before lsp.aerial
