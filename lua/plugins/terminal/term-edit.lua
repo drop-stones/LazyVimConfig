@@ -1,7 +1,7 @@
 return {
   {
     "chomosuke/term-edit.nvim",
-    ft = { "fzf", "toggleterm" },
+    ft = { "fzf", "snacks_terminal" },
     opts = {
       prompt_end = " ",
     },
