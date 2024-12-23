@@ -72,9 +72,6 @@ return {
           { pattern = "pomodoro", icon = "", color = "green" },
           { pattern = "timer", icon = "", color = "green" },
 
-          -- toggleterm
-          { pattern = "toggleterm", icon = " ", color = "red" },
-
           -- overseer
           { pattern = "overseer", icon = "", color = "cyan" },
           { pattern = "task", icon = "", color = "cyan" },
