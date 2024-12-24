@@ -19,7 +19,6 @@ return {
 
       -- Optional
       "ibhagwan/fzf-lua",
-      "hrsh7th/nvim-cmp",
       "nvim-treesitter/nvim-treesitter",
     },
     cmd = {
