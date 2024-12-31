@@ -38,5 +38,6 @@ return {
       end
       return true
     end,
+    init = function() end,
   },
 }
