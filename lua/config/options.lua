@@ -24,4 +24,18 @@ vim.opt.spell = true
 
 vim.lsp.set_log_level("ERROR")
 
+-- Speed up startup (https://dev.to/llllvvuu/improving-neovim-load-time-on-wsl-2-441)
+if vim.fn.has("wsl") then
+  vim.g.clipboard = {
+    copy = {
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
+    },
+  }
+end
+
 local has_private_options, private_options = pcall(require, "config.private.options")
