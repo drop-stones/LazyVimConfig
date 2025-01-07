@@ -9,8 +9,8 @@ local normal_keymap = {
   { key = "k", action = "<Up>" },
   { key = "<Down>", action = "<Down>" },
   { key = "<Up>", action = "<Up>" },
-  { key = "gg", action = "<A-G>" }, -- first
-  { key = "G", action = "<A-g>" }, -- end
+  { key = "gg", action = "<A-g>" }, -- first
+  { key = "G", action = "<A-G>" }, -- end
   { key = "<C-u>", action = "<C-u>" }, -- page-up
   { key = "<C-d>", action = "<C-d>" }, --page-down
   { key = "s", action = "<C-x>", insert = true }, -- jump
