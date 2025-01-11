@@ -22,6 +22,9 @@ end
 vim.opt.spelllang = { "en_us", "cjk" }
 vim.opt.spell = true
 
+-- Disable mouse
+vim.opt.mouse = ""
+
 vim.lsp.set_log_level("ERROR")
 
 -- Speed up startup (https://dev.to/llllvvuu/improving-neovim-load-time-on-wsl-2-441)
