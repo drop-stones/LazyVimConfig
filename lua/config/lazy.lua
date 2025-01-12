@@ -13,7 +13,6 @@ require("lazy").setup({
     -- import/override with your plugins
     { import = "plugins.code_runner" },
     { import = "plugins.colorscheme" },
-    { import = "plugins.comment" },
     { import = "plugins.completion" },
     { import = "plugins.dap" },
     { import = "plugins.dotfiles" },
