@@ -28,7 +28,7 @@ vim.opt.mouse = ""
 vim.lsp.set_log_level("ERROR")
 
 -- Speed up startup (https://dev.to/llllvvuu/improving-neovim-load-time-on-wsl-2-441)
-if vim.fn.has("wsl") then
+if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
     copy = {
       ["+"] = "win32yank.exe -i --crlf",
