@@ -12,6 +12,7 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
     { import = "plugins.code_runner" },
+    { import = "plugins.color" },
     { import = "plugins.colorscheme" },
     { import = "plugins.completion" },
     { import = "plugins.dap" },
