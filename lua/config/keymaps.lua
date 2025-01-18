@@ -7,4 +7,7 @@ local map = vim.keymap.set
 -- Paste by '<C-v>'
 map({ "i", "c" }, "<C-v>", "<C-r>+")
 
+-- Prints the current file name
+map("n", "<C-p>", "<C-g>")
+
 local has_private_keymaps, private_keymaps = pcall(require, "config.private.keymaps")
