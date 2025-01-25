@@ -114,29 +114,4 @@ return {
       return require("plugins.fuzzy_finder.fzf-lua.mappings").setup_fzf_keymap(fzf_keys)
     end,
   },
-  {
-    "goolord/alpha-nvim",
-    opts = function(_, _)
-      local dashboard = require("alpha.themes.dashboard")
-      local cmds = require("plugins.fuzzy_finder.fzf-lua.cmds")
-
-      ---@param shortcut string
-      ---@param txt string
-      ---@param callback function
-      local generate_button = function(shortcut, txt, callback)
-        local button = dashboard.button(shortcut, txt, callback)
-        button.opts.hl = "AlphaButtons"
-        button.opts.hl_shortcut = "AlphaShortcut"
-        return button
-      end
-
-      for idx, button in ipairs(dashboard.section.buttons.val) do
-        if string.find(button.val, "Find file") then
-          dashboard.section.buttons.val[idx] = generate_button(button.opts.shortcut, button.val, cmds.find_files())
-        elseif string.find(button.val, "Find text") then
-          dashboard.section.buttons.val[idx] = generate_button(button.opts.shortcut, button.val, cmds.live_grep())
-        end
-      end
-    end,
-  },
 }
