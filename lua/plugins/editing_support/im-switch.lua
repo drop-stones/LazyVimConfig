@@ -12,7 +12,7 @@ return {
       },
       mac = {
         enabled = true,
-        default_im = "com.apple.inputmethod.Kotoeri.RomajiTyping.Roman",
+        default_im = "com.apple.keylayout.ABC",
       },
       linux = {
         enabled = true,
