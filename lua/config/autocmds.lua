@@ -26,4 +26,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+-- Indent settings
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "rust" },
+  command = "setlocal shiftwidth=2 tabstop=2 softtabstop=0",
+})
+
 local has_private_autocmds, private_autocmds = pcall(require, "config.private.autocmds")
