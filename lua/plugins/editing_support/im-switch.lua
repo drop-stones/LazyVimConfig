@@ -5,19 +5,20 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     opts = {
-      set_previous_im_events = {},
-      save_im_events = {},
+      default_im_events = { "VimEnter", "InsertEnter", "FocusGained", "InsertLeave", "CmdlineLeave" },
+      save_im_state_events = {},
+      restore_im_events = {},
       windows = {
         enabled = true,
       },
-      mac = {
+      macos = {
         enabled = true,
         default_im = "com.apple.keylayout.ABC",
       },
       linux = {
         enabled = true,
         default_im = "keyboard-us",
-        obtain_im_command = { "fcitx5-remote", "-n" },
+        get_im_command = { "fcitx5-remote", "-n" },
         set_im_command = { "fcitx5-remote", "-s" },
       },
     },
