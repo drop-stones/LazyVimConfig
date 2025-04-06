@@ -38,5 +38,16 @@ return {
         },
       },
     },
+    keys = {
+      { "<leader>/", false },
+      { "<leader>ff", false },
+      { "<leader>fF", false },
+      { "<leader>sg", false },
+      { "<leader>sG", false },
+      { "<leader>sw", false },
+      { "<leader>sW", false },
+      { "<leader>sw", mode = "v", false },
+      { "<leader>sW", mode = "v", false },
+    },
   },
 }
