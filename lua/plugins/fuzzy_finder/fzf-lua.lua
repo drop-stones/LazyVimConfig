@@ -2,6 +2,7 @@ return {
   { import = "lazyvim.plugins.extras.editor.fzf" },
   {
     "ibhagwan/fzf-lua",
+    dependencies = { "drop-stones/fzf-lua-normal-mode" },
     opts = {
       files = { headers = false },
       git = {
