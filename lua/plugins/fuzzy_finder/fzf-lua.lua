@@ -2,7 +2,7 @@ return {
   { import = "lazyvim.plugins.extras.editor.fzf" },
   {
     "ibhagwan/fzf-lua",
-    dependencies = { "drop-stones/fzf-lua-normal-mode" },
+    dependencies = { "drop-stones/fzf-lua-normal-mode", "drop-stones/fzf-lua-grep-context" },
     opts = {
       files = { headers = false },
       git = {
@@ -20,8 +20,15 @@ return {
       grep = {
         headers = false,
         live_ast_prefix = false, -- remove '*' from prompt
+        rg_glob = false,
+        fn_transform_cmd = function(query, cmd, _)
+          vim.opt.rtp:append(vim.env.FZF_LUA_GREP_CONTEXT)
+          return require("fzf-lua-grep-context.transform").rg(query, cmd)
+        end,
         actions = {
-          ["ctrl-r"] = { require("fzf-lua.actions").grep_lgrep },
+          -- stylua: ignore
+          ["ctrl-t"] = function() require("fzf-lua-grep-context").picker() end,
+          ["ctrl-r"] = require("fzf-lua.actions").grep_lgrep,
         },
       },
       args = { headers = false },

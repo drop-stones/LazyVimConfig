@@ -16,6 +16,7 @@ return {
         { key = "<C-r>", action = "<C-r>", repeatable = true },
         { key = "q", action = "<Esc>", repeatable = false },
         { key = "<Enter>", action = "<CR>", repeatable = false },
+        { key = "<C-t>", action = "<C-t>", repeatable = false },
       },
     },
   },

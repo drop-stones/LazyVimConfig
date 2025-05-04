@@ -2,7 +2,14 @@ return {
   {
     "drop-stones/fzf-lua-git-search",
     dependencies = { "ibhagwan/fzf-lua", "ahmedkhalf/project.nvim" },
-    opts = {},
+    opts = {
+      git_grep = {
+        fn_transform_cmd = function(query, cmd, _)
+          vim.opt.rtp:append(vim.env.FZF_LUA_GREP_CONTEXT)
+          return require("fzf-lua-grep-context.transform").git_grep(query, cmd)
+        end,
+      },
+    },
     keys = {
       -- stylua: ignore start
       { "<leader>/", function() require("fzf-lua-git-search").live_grep({ root = true }) end, desc = "Grep (Root Dir)" },
