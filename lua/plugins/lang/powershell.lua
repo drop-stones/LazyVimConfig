@@ -5,7 +5,9 @@ return {
     opts = {
       servers = {
         -- Ensure mason installs powershell editor services
-        powershell_es = {},
+        powershell_es = {
+          settings = { powershell = { codeFormatting = { Preset = "OTBS" } } },
+        },
       },
     },
   },
