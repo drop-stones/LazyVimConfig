@@ -1,5 +1,9 @@
 return {
-  -- PowerShell (no parsers are maintained)
+  -- PowerShell
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "powershell" } },
+  },
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -18,10 +22,7 @@ return {
       -- Ensure mason installs netcoredbg
       {
         "williamboman/mason.nvim",
-        opts = function(_, opts)
-          opts.ensure_installed = opts.ensure_installed or {}
-          vim.list_extend(opts.ensure_installed, { "netcoredbg" })
-        end,
+        opts = { ensure_installed = { "netcoredbg" } },
       },
     },
   },
