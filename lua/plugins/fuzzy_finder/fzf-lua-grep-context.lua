@@ -4,6 +4,9 @@ return {
     opts = {
       picker = {
         default_group = "filetypes",
+        checkbox = {
+          mark = "󰸞",
+        },
       },
     },
   },
