@@ -21,7 +21,7 @@ return {
     dependencies = {
       -- Ensure mason installs netcoredbg
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = { ensure_installed = { "netcoredbg" } },
       },
     },

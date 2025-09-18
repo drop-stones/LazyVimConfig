@@ -1,7 +1,7 @@
 return {
   -- Mason PATH config
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       -- use local lsp if already installed
       PATH = "append",

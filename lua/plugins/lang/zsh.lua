@@ -21,7 +21,7 @@ return {
     dependencies = {
       -- Ensure mason installs bash-debug-adapter
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = { ensure_installed = { "bash-debug-adapter" } },
       },
     },
