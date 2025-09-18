@@ -2,7 +2,7 @@ return {
   -- mini-suround
   { import = "lazyvim.plugins.extras.coding.mini-surround" },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     opts = {
       custom_surroundings = {
         -- Change defaults not to insert whitespaces
