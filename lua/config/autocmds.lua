@@ -32,4 +32,10 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal shiftwidth=2 tabstop=2 softtabstop=0",
 })
 
+-- fish_indent formatter uses 4 spaces
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "fish" },
+  command = "setlocal shiftwidth=4 tabstop=4 softtabstop=0",
+})
+
 local has_private_autocmds, private_autocmds = pcall(require, "config.private.autocmds")
