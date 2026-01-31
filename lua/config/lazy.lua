@@ -27,7 +27,6 @@ require("lazy").setup({
     { import = "plugins.startup" }, -- before project
     { import = "plugins.fuzzy_finder" }, -- after startup
     { import = "plugins.project" },
-    { import = "plugins.search" },
     { import = "plugins.statusline" },
     { import = "plugins.syntax" },
     { import = "plugins.terminal" },
