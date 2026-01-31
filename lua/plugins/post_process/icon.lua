@@ -75,9 +75,6 @@ return {
           -- overseer
           { pattern = "overseer", icon = "", color = "cyan" },
           { pattern = "task", icon = "", color = "cyan" },
-
-          -- hardtime.nvim
-          { pattern = "hardtime", icon = "", color = "yellow" },
         },
       },
     },
