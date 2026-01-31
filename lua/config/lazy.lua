@@ -16,7 +16,6 @@ require("lazy").setup({
     { import = "plugins.colorscheme" },
     { import = "plugins.completion" },
     { import = "plugins.dap" },
-    { import = "plugins.dotfiles" },
     { import = "plugins.editing_support" },
     { import = "plugins.git" },
     { import = "plugins.keybinding" },
