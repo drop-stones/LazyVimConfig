@@ -1,4 +1,5 @@
-return {
+-- stylua: ignore
+return vim.fn.executable("pwsh") == 1 and {
   -- PowerShell
   {
     "nvim-treesitter/nvim-treesitter",
@@ -26,4 +27,4 @@ return {
       },
     },
   },
-}
+} or {}
