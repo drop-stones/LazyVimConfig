@@ -67,10 +67,6 @@ return {
 
           -- note taking
           { pattern = "note", icon = "", color = "purple" },
-
-          -- timer
-          { pattern = "pomodoro", icon = "", color = "green" },
-          { pattern = "timer", icon = "", color = "green" },
         },
       },
     },
