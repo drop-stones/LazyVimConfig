@@ -13,4 +13,7 @@ end
 -- Prints the current file name
 map("n", "<C-p>", "<C-g>")
 
+-- Escape insert mode by 'ｊｋ'
+map("i", "ｊｋ", "<Esc>")
+
 local has_private_keymaps, private_keymaps = pcall(require, "config.private.keymaps")
