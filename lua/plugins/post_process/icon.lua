@@ -71,10 +71,6 @@ return {
           -- timer
           { pattern = "pomodoro", icon = "", color = "green" },
           { pattern = "timer", icon = "", color = "green" },
-
-          -- overseer
-          { pattern = "overseer", icon = "", color = "cyan" },
-          { pattern = "task", icon = "", color = "cyan" },
         },
       },
     },
