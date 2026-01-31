@@ -15,7 +15,6 @@ require("lazy").setup({
     { import = "plugins.completion" },
     { import = "plugins.dap" },
     { import = "plugins.editing_support" },
-    { import = "plugins.git" },
     { import = "plugins.keybinding" },
     { import = "plugins.lang" },
     { import = "plugins.window" }, -- before lsp.aerial
