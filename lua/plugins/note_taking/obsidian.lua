@@ -18,7 +18,6 @@ return {
       "nvim-lua/plenary.nvim",
 
       -- Optional
-      "ibhagwan/fzf-lua",
       "nvim-treesitter/nvim-treesitter",
     },
     cmd = {
@@ -149,11 +148,6 @@ return {
         end
         return false
       end,
-
-      picker = {
-        -- Set your preferred picker
-        name = "fzf-lua",
-      },
 
       -- Optional, configure additional syntax highlighting / extmarks.
       -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
