@@ -27,7 +27,6 @@ require("lazy").setup({
     { import = "plugins.project" },
     { import = "plugins.statusline" },
     { import = "plugins.syntax" },
-    { import = "plugins.terminal" },
     { import = "plugins.test" },
     { import = "plugins.util" },
     { import = "plugins.post_process" },
