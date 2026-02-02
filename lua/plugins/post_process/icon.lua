@@ -65,8 +65,8 @@ return {
           -- flash.nvim
           { pattern = "flash", icon = "⚡", color = "yellow" },
 
-          -- note taking
-          { pattern = "note", icon = "", color = "purple" },
+          -- obsidian
+          { pattern = "obsidian", icon = "", color = "purple" },
         },
       },
     },
