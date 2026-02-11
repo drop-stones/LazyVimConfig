@@ -44,6 +44,39 @@ return {
       { "<leader>oL", "<Cmd>Obsidian link_new<Cr>", desc = "Link to new note", mode = { "v" } },
     },
 
+    -- Create default template
+    build = function()
+      if vim.fn.has("wsl") == 1 then
+        local link_path = vim.fn.expand("~/vault")
+        if vim.uv.fs_stat(link_path) == 1 then
+          return
+        end
+
+        -- symlink from "~/vault" to "$env:USERPROFILE/vault"
+        local win_home_path = vim.fn.trim(vim.fn.system({ "powershell.exe", "-NoProfile", "-Command", "$env:USERPROFILE" }))
+        local target_path = vim.fn.trim(vim.fn.system({ "wslpath", "-u", win_home_path })) .. "/vault"
+        vim.uv.fs_symlink(target_path, link_path)
+      else
+        local template_path = vim.fn.expand("~/vault/templates/default.md")
+        if vim.fn.filereadable(template_path) == 1 then
+          return
+        end
+
+        -- create default template
+        vim.fn.mkdir(vim.fs.dirname(template_path), "p")
+        vim.fn.writefile({
+          "---",
+          "id: {{id}}",
+          "aliases:",
+          " - {{title}}",
+          "tags: []",
+          "---",
+          "",
+          "# {{title}}",
+        }, template_path)
+      end
+    end,
+
     ---@module 'obsidian'
     ---@type obsidian.config
     opts = {
@@ -57,9 +90,16 @@ return {
         folder = "templates",
       },
 
+      ---@type obsidian.config.NoteOpts
+      note = {
+        -- template = vim.fn.expand("~/vault/templates/default.md"),
+        template = vim.fn.expand("default.md"),
+      },
+
       ---@type obsidian.config.DailyNotesOpts
       daily_notes = {
         folder = "daily",
+        template = vim.fn.expand("default.md"),
       },
 
       workspaces = {
