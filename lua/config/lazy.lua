@@ -22,7 +22,6 @@ require("lazy").setup({
     { import = "plugins.motion" },
     { import = "plugins.note_taking" },
     { import = "plugins.startup" }, -- before project
-    { import = "plugins.project" },
     { import = "plugins.statusline" },
     { import = "plugins.syntax" },
     { import = "plugins.test" },
