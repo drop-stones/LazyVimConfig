@@ -31,7 +31,6 @@ return {
           { pattern = "widget", icon = "󱍕", color = "cyan" },
           { pattern = "line", icon = "", color = "cyan" },
           { pattern = "keymaps", icon = "", color = "cyan" },
-          { pattern = "misc", icon = "", color = "cyan" },
 
           -- direction
           { pattern = "up", icon = " ", color = direction_color },
