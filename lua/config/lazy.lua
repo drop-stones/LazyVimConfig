@@ -19,7 +19,6 @@ require("lazy").setup({
     { import = "plugins.lang" },
     { import = "plugins.window" }, -- before lsp.aerial
     { import = "plugins.lsp" },
-    { import = "plugins.marks" },
     { import = "plugins.motion" },
     { import = "plugins.note_taking" },
     { import = "plugins.picker" },
