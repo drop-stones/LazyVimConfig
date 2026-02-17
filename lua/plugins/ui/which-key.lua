@@ -1,6 +1,3 @@
-local direction_color = "blue"
-local position_color = "azure"
-
 return {
   {
     "folke/which-key.nvim",
@@ -33,17 +30,17 @@ return {
           { pattern = "keymaps", icon = "", color = "cyan" },
 
           -- direction
-          { pattern = "up", icon = " ", color = direction_color },
-          { pattern = "down", icon = " ", color = direction_color },
-          { pattern = "right", icon = " ", color = direction_color },
-          { pattern = "left", icon = " ", color = direction_color },
+          { pattern = "up", icon = " ", color = "blue" },
+          { pattern = "down", icon = " ", color = "blue" },
+          { pattern = "right", icon = " ", color = "blue" },
+          { pattern = "left", icon = " ", color = "blue" },
 
           -- position
-          { pattern = "next", icon = "󰒭", color = position_color },
-          { pattern = "prev", icon = "󰒮", color = position_color },
-          { pattern = "around", icon = "󰅪", color = position_color },
-          { pattern = "inside", icon = "󰅲", color = position_color },
-          { pattern = "matching", icon = "󰅪", color = position_color },
+          { pattern = "next", icon = "󰒭", color = "azure" },
+          { pattern = "prev", icon = "󰒮", color = "azure" },
+          { pattern = "around", icon = "󰅪", color = "azure" },
+          { pattern = "inside", icon = "󰅲", color = "azure" },
+          { pattern = "matching", icon = "󰅪", color = "azure" },
 
           -- comment
           { pattern = "comment", icon = "", color = "cyan" },
