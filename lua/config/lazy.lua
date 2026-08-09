@@ -29,7 +29,10 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight" } },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  -- No automatic update checks: they `git fetch` every plugin in the
+  -- background, which is noticeably slow on Windows. Check manually with `C`
+  -- inside `:Lazy` instead.
+  checker = { enabled = false },
   performance = {
     rtp = {
       -- disable some rtp plugins
